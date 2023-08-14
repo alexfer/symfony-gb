@@ -5,6 +5,7 @@
 {% block body %}
     <div class="container">
         <h2 class="text-center mt-5 mb-3">Show Entry</h2>
+        {% include 'flashMessage/flashMessage.html.twig' %}        
         <div class="card">
             <div class="card-header">
                 <a class="btn btn-secondary float-end" href="{{ path('app_g_b_index') }}"> 
@@ -21,7 +22,7 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
                 <hr>                
                 <b class="text-muted">UUid:</b>
-                <p>{{ gb.uuid }}</p>
+                <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}">Reference to page</a> 
             </div>
         </div>
     </div>

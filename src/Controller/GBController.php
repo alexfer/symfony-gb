@@ -33,10 +33,13 @@ class GBController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Entry has been created successfuly.');
             $entityManager->persist($gB);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_g_b_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_g_b_edit', [
+                'uuid' => $gB->getUuid()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('gb/new.html.twig', [
@@ -47,7 +50,7 @@ class GBController extends AbstractController
 
     #[Route('/{uuid}', name: 'app_g_b_show', methods: ['GET'])]
     public function show(GB $gB): Response
-    {
+    {        
         return $this->render('gb/show.html.twig', [
                     'gb' => $gB,
         ]);
@@ -58,12 +61,16 @@ class GBController extends AbstractController
     {
         $form = $this->createForm(GBType::class, $gB);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
+            
+            return $this->redirectToRoute('app_g_b_edit', [
+                'uuid' => $gB->getUuid()
+            ], Response::HTTP_SEE_OTHER);
 
-            return $this->redirectToRoute('app_g_b_index', [], Response::HTTP_SEE_OTHER);
+            //return $this->redirectToRoute('app_g_b_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('gb/edit.html.twig', [

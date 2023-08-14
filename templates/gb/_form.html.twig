@@ -1,4 +1,5 @@
 {{ form_start(form) }}
+    {% include 'flashMessage/flashMessage.html.twig' %}
     <div class="form-group">
         {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
     </div>

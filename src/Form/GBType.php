@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Uid\Uuid;
 
 class GBType extends AbstractType
@@ -16,7 +17,11 @@ class GBType extends AbstractType
     {
         $builder
                 ->add('title')
-                ->add('message')
+                ->add('message', TextareaType::class, [
+                    'attr' => [
+                        'rows' => 10
+                    ],
+                ])
                 ->add('uuid', HiddenType::class, [
                     'data' => Uuid::v4(),
                 ])
