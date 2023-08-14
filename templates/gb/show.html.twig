@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entries{% endblock %}
+{% block title %}Show Entry{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -15,12 +15,13 @@
                 <b class="text-muted">Title:</b>
                 <p>{{ gb.Title }}</p>
                 <b class="text-muted">Message:</b>
-                <p>{{ gb.Message }}</p>
-                <b class="text-muted">UUid:</b>
-                <p>{{ gb.uuid }}</p>                
-                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}
+                <p>{{ gb.Message|nl2br }}</p>                               
+                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}     
                 <p></p>
-                <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}                
+                <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
+                <hr>                
+                <b class="text-muted">UUid:</b>
+                <p>{{ gb.uuid }}</p>
             </div>
         </div>
     </div>

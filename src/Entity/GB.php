@@ -20,7 +20,7 @@ class GB
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 512, type: 'text')]
+    #[ORM\Column(length: 65535, type: 'text')]
     private ?string $message = null;
 
     #[ORM\Column(length: 255, nullable: true)]

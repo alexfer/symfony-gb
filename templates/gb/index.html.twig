@@ -20,7 +20,7 @@
                             <th>Title</th>
                             <th>Created At</th>
                             <th>Updated At</th>
-                            <th>Actions</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,8 +31,8 @@
                                 <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
                                 <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                 <td class="text-center">
-                                    <a href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
-                                    <a href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
+                                    <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
+                                    <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
                                 </td>
                             </tr>
                         {% else %}
