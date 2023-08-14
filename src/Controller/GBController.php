@@ -28,7 +28,7 @@ class GBController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $gB = new GB();
-                        
+
         $form = $this->createForm(GBType::class, $gB);
         $form->handleRequest($request);
 
