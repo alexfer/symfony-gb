@@ -6,5 +6,6 @@
 <div class="form-group">
     {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
 </div>
+{{ form_row(form.captcha) }} 
 <button class="btn {{ button_color|default('btn-primary') }}  mt-3">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
