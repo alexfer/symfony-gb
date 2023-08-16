@@ -6,9 +6,11 @@ use App\Entity\GB;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Form\Extension\Core\Type\{
+    TextareaType,
+    TextType,
+};
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 
 class GBType extends AbstractType
 {
@@ -16,21 +18,14 @@ class GBType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-                ->add('title')
-                ->add('message', TextareaType::class, [
+                ->add('title', TextType::class)
+                ->add('message', TinymceType::class, [
                     'attr' => [
-                        'rows' => 10
+                        "toolbar" => "bold italic underline | bullist numlist",
+                        'plugins' => "advlist autolink link image media table lists",
+                        'rows' => 10,
                     ],
-                ])
-                ->add('uuid', HiddenType::class, [
-                    'data' => Uuid::v4(),
-                ])
-                ->add('author_id', HiddenType::class, [
-                    'data' => '1',
-                ])
-        //->add('created_at')
-        //->add('updated_at')
-        ;
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

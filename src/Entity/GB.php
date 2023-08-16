@@ -26,7 +26,7 @@ class GB
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $uuid = null;
 
-    #[ORM\Column]
+    #[ORM\Column]    
     private ?int $author_id = null;
 
     //#[Gedmo\Timestampable(on:"update")]
@@ -38,7 +38,7 @@ class GB
     //#[ORM\Column(type: 'datetime', nullable: true)]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, columnDefinition: 'DATETIME on update CURRENT_TIMESTAMP')]
     private \DateTime $updated_at;
-
+    
     public function __construct()
     {
         $this->created_at = new \DateTime();

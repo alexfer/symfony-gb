@@ -16,7 +16,11 @@
                 <b class="text-muted">Title:</b>
                 <p>{{ gb.Title }}</p>
                 <b class="text-muted">Message:</b>
-                <p>{{ gb.Message|nl2br }}</p>                               
+                <p>
+                    {% autoescape %}
+                        {{ gb.Message|raw }}
+                    {% endautoescape %}
+                </p>                               
                 <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}     
                 <p></p>
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
