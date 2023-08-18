@@ -1,0 +1,7 @@
+/* assets/styles/app.css */
+body {
+    background-color: black;
+}
+.captcha_image {
+    margin-left: 20px;
+}

@@ -1,0 +1,30 @@
+{
+    "name": "symfony-gb",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexfer/symfony-gb.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alexfer/symfony-gb/issues"
+    },
+    "homepage": "https://github.com/alexfer/symfony-gb#readme",
+    "devDependencies": {
+        "@symfony/webpack-encore": "^4.4.0",
+        "webpack-notifier": "^1.15.0"
+    }
+}

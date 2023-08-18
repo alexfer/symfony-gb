@@ -16,6 +16,14 @@ class GB
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
+//    #[ORM\Column(length: 512)]
+//    private ?string $name = null;
+//
+//    #[ORM\Column(length: 255)]
+//    //#[Assert\NotBlank()]
+//    //#[Assert\Email()]
+//    protected $email;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -49,7 +57,7 @@ class GB
     {
         return $this->id;
     }
-
+    
     public function getTitle(): ?string
     {
         return $this->title;
@@ -61,7 +69,30 @@ class GB
 
         return $this;
     }
-
+    
+//    public function getName(): ?string
+//    {
+//        return $this->name;
+//    }
+//
+//    public function setName(string $name): static
+//    {
+//        $this->name = $name;
+//
+//        return $this;
+//    }
+//
+//    public function getEmail(): ?string
+//    {
+//        return $this->email;
+//    }
+//
+//    public function setEmail(string $email): static
+//    {
+//        $this->email = $email;
+//
+//        return $this;
+//    }
     public function getUuid(): ?string
     {
         return $this->uuid;
