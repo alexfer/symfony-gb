@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-#[Route('/')]
+#[Route('/gb')]
 class GBController extends AbstractController
 {
 
     #[Route('/', name: 'app_g_b_index', methods: ['GET'])]
-    public function index(GBRepository $gBRepository): Response
+    public function index(GBRepository $gBRepository, UserInterface $user): Response
     {
         return $this->render('gb/index.html.twig', [
-                    'g_bs' => $gBRepository->findBy(array(), array('id' => 'DESC')),
+                    'g_bs' => $gBRepository->findBy(['user_id' => $user->getId()], ['id' => 'DESC']),
         ]);
     }
 
     #[Route('/new', name: 'app_g_b_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, UserInterface $user, EntityManagerInterface $entityManager): Response
     {
         $gB = new GB();
 
@@ -37,7 +37,7 @@ class GBController extends AbstractController
             $this->addFlash('success', 'Entry has been created successfuly.');
             $uuid = Uuid::v4();
             $gB->setUuid($uuid);
-            $gB->setAuthorId(10000);
+            $gB->setUserId($user->getId());
 
             $entityManager->persist($gB);
             $entityManager->flush();

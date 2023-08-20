@@ -35,7 +35,7 @@ class GB
     private ?string $uuid = null;
 
     #[ORM\Column]    
-    private ?int $author_id = null;
+    private ?int $user_id = null;
 
     //#[Gedmo\Timestampable(on:"update")]
     //#[ORM\Column(type: 'datetime', nullable: true)]
@@ -69,30 +69,7 @@ class GB
 
         return $this;
     }
-    
-//    public function getName(): ?string
-//    {
-//        return $this->name;
-//    }
-//
-//    public function setName(string $name): static
-//    {
-//        $this->name = $name;
-//
-//        return $this;
-//    }
-//
-//    public function getEmail(): ?string
-//    {
-//        return $this->email;
-//    }
-//
-//    public function setEmail(string $email): static
-//    {
-//        $this->email = $email;
-//
-//        return $this;
-//    }
+
     public function getUuid(): ?string
     {
         return $this->uuid;
@@ -116,14 +93,14 @@ class GB
         return $this;
     }
 
-    public function getAuthorId(): ?int
+    public function getUserId(): ?int
     {
-        return $this->author_id;
+        return $this->user_id;
     }
 
-    public function setAuthorId(int $author_id): static
+    public function setUserId(int $user_id): static
     {
-        $this->author_id = $author_id;
+        $this->user_id = $user_id;
 
         return $this;
     }

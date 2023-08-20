@@ -1,7 +1,10 @@
 /* assets/styles/app.css */
 body {
-    background-color: black;
+    background-color: lightgray;
 }
 .captcha_image {
     margin-left: 20px;
+}
+.alert-danger ul {
+    list-style: none;
 }
