@@ -1,0 +1,46 @@
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('app_g_b_index') }}">{{ 'menu.homepage'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            {% if app.user %}
+                <ul class="navbar-nav">                                           
+                    <li class="nav-item dropdown justify-content-between">
+                        <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.email }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userMenu">
+                            <a class="dropdown-item" href="{{ path('app_profile') }}">{{ 'menu.user'|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('app_admin') }}">{{ 'menu.admin'|trans }}</a>                                    
+                                <a class="dropdown-item" href="#">{{ 'menu.users'|trans }}</a>                                    
+                            {% else %}
+                                <a class="dropdown-item" href="{{ path('app_g_b_index') }}">{{ 'user.entries'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'menu.logout'|trans }}</a>
+                        </div>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav justify-content-between">    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">{{ 'title.register'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">{{ 'action.sign_in'|trans }}</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+    <!-- Navbar -->
+</div>

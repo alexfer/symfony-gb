@@ -16,7 +16,7 @@ class GB
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-    
+
 //    #[ORM\Column(length: 512)]
 //    private ?string $name = null;
 //
@@ -34,8 +34,11 @@ class GB
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $uuid = null;
 
-    #[ORM\Column]    
+    #[ORM\Column]
     private ?int $user_id = null;
+
+    #[ORM\Column]
+    private ?int $approved = null;
 
     //#[Gedmo\Timestampable(on:"update")]
     //#[ORM\Column(type: 'datetime', nullable: true)]
@@ -46,7 +49,7 @@ class GB
     //#[ORM\Column(type: 'datetime', nullable: true)]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, columnDefinition: 'DATETIME on update CURRENT_TIMESTAMP')]
     private \DateTime $updated_at;
-    
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -57,7 +60,7 @@ class GB
     {
         return $this->id;
     }
-    
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -101,6 +104,18 @@ class GB
     public function setUserId(int $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getApproved(): ?int
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(int $approved): static
+    {
+        $this->approved = $approved;
 
         return $this;
     }

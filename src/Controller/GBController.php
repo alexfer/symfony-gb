@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 #[Route('/gb')]
 class GBController extends AbstractController
@@ -31,6 +32,11 @@ class GBController extends AbstractController
         $gB = new GB();
 
         $form = $this->createForm(GBType::class, $gB);
+        $form->add('captcha', CaptchaType::class, [
+            'label_attr' => [
+                'class' => 'form-group mt-4 mb-4',
+                'for' => "captcha",
+        ]]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -38,6 +44,7 @@ class GBController extends AbstractController
             $uuid = Uuid::v4();
             $gB->setUuid($uuid);
             $gB->setUserId($user->getId());
+            $gB->setApproved(1);
 
             $entityManager->persist($gB);
             $entityManager->flush();
@@ -72,6 +79,7 @@ class GBController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_g_b_edit', [
+                        'action' => 'edit',
                         'uuid' => $gB->getUuid()
                             ], Response::HTTP_SEE_OTHER);
         }
