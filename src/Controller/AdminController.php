@@ -18,7 +18,7 @@ class AdminController extends AbstractController
     #[Route('/', name: 'app_admin_index')]
     public function index(GBRepository $gBRepository): Response
     {        
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/gb/index.html.twig', [
             'g_bs' => $gBRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
