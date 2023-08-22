@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ 'title.register'|trans }}{% endblock %}
 
 {% block body %}
-
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">Register</h2>
-        <div class="card">                        
+        <div class="card border-secondary mt-5">        
+            <div class="card-header">
+                <h5>{{ 'title.register'|trans }}</h5>
+            </div>
             <div class="card-body">
                 {% for flash_error in app.flashes('verify_email_error') %}
                     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -22,17 +23,18 @@
                     {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+                    {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
                 </div>
                 <div class="form-check mt-3">
                     {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
                 </div>    
                 <input type="hidden" name="_target_path" value="{{ path('app_g_b_index') }}"/>
-                <button class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('Register') }}</button>
-                {{ form_end(registrationForm) }}
-            </div>
-        </div>
-    </div>    
+            </div>  
+            <div class="card-footer">
+                <button class="btn {{ button_color|default('btn-primary') }}">{{ button_label|default('Register') }}</button>
+            </div
+        </div>        
+        {{ form_end(registrationForm) }}         
+    </div>
+</div> 
 {% endblock %}

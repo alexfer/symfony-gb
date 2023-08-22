@@ -74,7 +74,7 @@
             </trans-unit>
             <trans-unit id="title.login">
                 <source>title.login</source>
-                <target>Secure Sign in</target>
+                <target>Secure Login</target>
             </trans-unit>
             <trans-unit id="title.register">
                 <source>title.register</source>
@@ -201,9 +201,9 @@
                 <source>action.publish_comment</source>
                 <target>Publish comment</target>
             </trans-unit>
-            <trans-unit id="action.sign_in">
-                <source>action.sign_in</source>
-                <target>Sign in</target>
+            <trans-unit id="action.login">
+                <source>action.login</source>
+                <target>Log In</target>
             </trans-unit>
             <trans-unit id="action.browse_app">
                 <source>action.browse_app</source>
