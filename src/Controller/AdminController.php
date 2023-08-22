@@ -15,14 +15,15 @@ use App\Form\GBType;
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
+
     #[Route('/', name: 'app_admin_index')]
     public function index(GBRepository $gBRepository): Response
-    {        
+    {
         return $this->render('admin/gb/index.html.twig', [
-            'g_bs' => $gBRepository->findBy([], ['id' => 'DESC']),
+                    'g_bs' => $gBRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
-    
+
     #[Route('/{uuid}', name: 'app_admin_entry_show', methods: ['GET'])]
     public function show(GB $gB): Response
     {
@@ -30,7 +31,7 @@ class AdminController extends AbstractController
                     'gb' => $gB,
         ]);
     }
-    
+
     #[Route('/{uuid}/edit', name: 'app_admin_entry_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager): Response
     {
@@ -52,16 +53,16 @@ class AdminController extends AbstractController
                     'form' => $form,
         ]);
     }
-    
+
     #[Route('/{uuid}/trash', name: 'app_admin_entry_delete', methods: ['POST'])]
     public function delete(Request $request, GB $gB, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $token = $request->request->get('token');
-        
+
         if (!$this->isCsrfTokenValid('delete', $token)) {
             return $this->redirectToRoute('app_admin');
-        }        
-        
+        }
+
         $entityManager->remove($gB);
         $entityManager->flush();
 

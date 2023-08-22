@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Entry{% endblock %}
+{% block title %}{{ 'title.edit_entry'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">Edit Entry</h2>        
-        {% include 'flashMessage/flashMessage.html.twig' %}        
-        <div class="card">
+        {% include 'flashMessage/flashMessage.html.twig' %}                
+        <div class="card border-secondary mt-5">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_admin_index') }}"> 
-                    Cancell
-                </a>
+                <h5>{{ 'title.edit_entry'|trans }}</h5>                
             </div>
             <div class="card-body">
                 {% include 'admin/gb/_form.html.twig' with {'button_label': 'Update', 'button_color': 'btn-primary'}  %}
+            </div>
+            <div class="card-footer">                
+                <div class="pull-right">
+                    <a class="btn btn-secondary" role="button" href="{{ path('app_admin_index') }}">{{ 'label.cancel'|trans }}</a> 
+                    <a class="btn btn-warning" role="button" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
+                </div>                    
             </div>
         </div>
     </div>

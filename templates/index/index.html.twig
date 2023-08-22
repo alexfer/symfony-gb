@@ -3,8 +3,15 @@
 {% block title %}Guest Book Summary!{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>{{ 'label.summary'|trans }}!</h1>
-    This friendly message is coming from:    
+    <div class="container">          
+        <div class="card border-secondary mt-5">
+            <div class="card-header">
+                <h5>{{ 'label.summary'|trans }}</h5>        
+            </div>
+            <div class="card-body">    
+                This friendly messages is coming    
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

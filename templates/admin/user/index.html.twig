@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users{% endblock %}
+{% block title %}{{ 'menu.users'|trans }}{% endblock %}
 
 {% block body %}    
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">Users</h2>        
-        <div class="card">
+        <div class="card border-secondary mt-5">        
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_admin_user_new') }}"> 
-                    Create
-                </a>
+                <h5>{{ 'menu.users'|trans }}</h5>        
             </div>
             <div class="card-body">
                 {% if app.user %}
@@ -43,6 +40,11 @@
                         </tbody>
                     </table>
                 {% endif %}
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-warning float-end" href="{{ path('app_admin_user_new') }}"> 
+                    Create
+                </a>
             </div>
         </div>
     </div>

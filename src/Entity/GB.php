@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\GBRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\DBAL\Types\DateTimeImmutableType;
 use Doctrine\DBAL\Types\Types;
 use App\Entity\User;
 

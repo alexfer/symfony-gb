@@ -2,8 +2,8 @@
     <i class="icon-trash"></i>
     {{ 'action.delete_entry'|trans }}
 </button>
-<a href="{{ path('app_admin_entry_edit', {'uuid': uuid}) }}" class="btn btn-secondary" role="button">
+<a href="{{ path('app_admin_entry_edit', {'uuid': uuid}) }}" class="btn btn-warning" role="button">
     <i class="icon-edit"></i>
     {{ 'action.edit'|trans }}
 </a>
-{{ include('admin/gb/_delete_entry_confirmation.html.twig') }}    
+{{ include('admin/gb/_delete_confirmation.html.twig') }}    

@@ -3,17 +3,17 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2 class="text-center mt-5 mb-3">Edit User</h2>        
+    <div class="container">        
         {% include 'flashMessage/flashMessage.html.twig' %}        
-        <div class="card">
+        <div class="card border-secondary mt-5">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_admin_users') }}"> 
-                    Cancell
-                </a>
+                <h5>{{ 'title.edit_user'|trans }}</h5>                
             </div>
             <div class="card-body">
                 {% include 'admin/user/_form.html.twig' with {'button_label': 'Update', 'button_color': 'btn-primary'}  %}
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-warning float-end" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>
             </div>
         </div>
     </div>

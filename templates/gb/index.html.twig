@@ -1,50 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GB Entries{% endblock %}
+{% block title %}{{ 'action.entries'|trans }}{% endblock %}
 
 {% block body %}    
-    <div class="container">
-        <h2 class="text-center mt-5 mb-3">GB Entries</h2>        
-        <div class="card">
+    <div class="container">        
+        <div class="card border-secondary mt-5">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_g_b_new') }}"> 
-                    Create
-                </a>
+                <h5>{{ 'action.entries'|trans }}</h5>                        
             </div>
             <div class="card-body">
                 {% if app.user %}
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>User Name</th>
-                            <th>Created At</th>
-                            <th>Updated At</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for gb in g_bs %}
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ gb.id }}</td>
-                                <td>{{ gb.title }}</td>        
-                                <td>{{ gb.user.name }}</td>
-                                <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
-                                <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
-                                <td class="text-center">
-                                    <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
-                                    <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
-                                </td>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>User Name</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th class="text-center">Actions</th>
                             </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                    {% endif %}
+                        </thead>
+                        <tbody>
+                            {% for gb in g_bs %}
+                                <tr>
+                                    <td>{{ gb.id }}</td>
+                                    <td>{{ gb.title }}</td>        
+                                    <td>{{ gb.user.name }}</td>
+                                    <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
+                                    <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
+                                    <td class="text-center">
+                                        <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
+                                        <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-secondary float-end" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
             </div>
         </div>
     </div>

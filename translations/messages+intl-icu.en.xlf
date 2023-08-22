@@ -84,9 +84,9 @@
                 <source>title.entry_entry</source>
                 <target>Entry List</target>
             </trans-unit>
-            <trans-unit id="title.entry_entry">
+            <trans-unit id="title.edit_entry">
                 <source>title.edit_entry</source>
-                <target>Edit entry #{id, number}</target>
+                <target>Edit entry</target>
             </trans-unit>
             <trans-unit id="title.add_comment">
                 <source>title.add_comment</source>
@@ -112,6 +112,10 @@
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Show</target>
+            </trans-unit>
+            <trans-unit id="action.entries">
+                <source>action.entries</source>
+                <target>Entries</target>
             </trans-unit>
             <trans-unit id="action.show_entry">
                 <source>action.show_entry</source>
@@ -149,6 +153,10 @@
                 <source>label.delete_entry</source>
                 <target>Delete entry</target>
             </trans-unit>
+            <trans-unit id="action.create_user">
+                <source>action.create_user</source>
+                <target>Create a new user</target>
+            </trans-unit>
             <trans-unit id="action.delete_user">
                 <source>action.delete_user</source>
                 <target>Delete user</target>
@@ -157,7 +165,7 @@
                 <source>delete_user_modal.title</source>
                 <target>Are you sure you want to delete this user?</target>
             </trans-unit>
-            <trans-unit id="delete__modal.body">
+            <trans-unit id="delete_user_modal.body">
                 <source>delete_user_modal.body</source>
                 <target>This action cannot be undone.</target>
             </trans-unit>
@@ -168,6 +176,10 @@
             <trans-unit id="label.cancel">
                 <source>label.cancel</source>
                 <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="action.all_entry">
+                <source>action.all_entry</source>
+                <target>Entries</target>
             </trans-unit>
             <trans-unit id="action.create_entry">
                 <source>action.create_entry</source>

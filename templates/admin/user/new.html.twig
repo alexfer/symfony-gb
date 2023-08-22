@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create User{% endblock %}
+{% block title %}{{ 'action.create_user'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2 class="text-center mt-5 mb-3">Create User</h2>
-        <div class="card">
+    <div class="container">        
+        <div class="card border-secondary mt-5">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_admin_users') }}"> 
-                    View All
-                </a>
+                <h5>{{ 'action.create_user'|trans }}</h5>
             </div>
             <div class="card-body">
                 {{ include('admin/user/_form.html.twig') }}
             </div>
+            <div class="card-footer">
+                <a class="btn btn-secondary float-end" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

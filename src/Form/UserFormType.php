@@ -38,10 +38,7 @@ class UserFormType extends AbstractType
                     ],
                 ])
                 ->add('roles', ChoiceType::class, [
-//                    'attr' => [
-//                        'class' => 'form-control',
-//                        'style' => 'margin:5px 0;'
-//                    ],
+                    'label' => 'Role',
                     'required' => true,
                     'multiple' => false,
                     'expanded' => false,
@@ -60,8 +57,7 @@ class UserFormType extends AbstractType
                                     // transform the array to a string
                                     return count($rolesArray) ? $rolesArray[0] : null;
                                 },
-                                function ($rolesString) {
-                                    // transform the string back to an array
+                                function ($rolesString) {                                    
                                     return [$rolesString];
                                 }
         ));

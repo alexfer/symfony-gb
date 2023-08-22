@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Show Entry{% endblock %}
+{% block title %}{{ 'action.show_entry'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2 class="text-center mt-5 mb-3">Show Entry</h2>
-        {% include 'flashMessage/flashMessage.html.twig' %}        
-        <div class="card">
+    <div class="container">                
+        <div class="card border-secondary mt-5">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_g_b_index') }}"> 
-                    View All
-                </a>
+                <h5>{{ 'action.show_entry'|trans }}</h5>
             </div>
             <div class="card-body">
                 <b class="text-muted">Title:</b>
@@ -26,7 +22,10 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
                 <hr>                
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}">Reference to page</a> 
+                <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}">Reference to page</a> 
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-secondary float-end" href="{{ path('app_g_b_index') }}">{{ 'action.all_entry'|trans }}</a>
             </div>
         </div>
     </div>
