@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
 use Doctrine\DBAL\Types\Types;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: GBRepository::class)]
 class GB
@@ -17,14 +18,6 @@ class GB
     #[ORM\Column]
     private ?int $id = null;
 
-//    #[ORM\Column(length: 512)]
-//    private ?string $name = null;
-//
-//    #[ORM\Column(length: 255)]
-//    //#[Assert\NotBlank()]
-//    //#[Assert\Email()]
-//    protected $email;
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -33,20 +26,19 @@ class GB
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $uuid = null;
+    
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'gb')]
+    private User $user;
 
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $user_id = null;
 
     #[ORM\Column]
     private ?int $approved = null;
 
-    //#[Gedmo\Timestampable(on:"update")]
-    //#[ORM\Column(type: 'datetime', nullable: true)]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private \DateTime $created_at;
 
-    //#[Gedmo\Timestampable(on:"update")]
-    //#[ORM\Column(type: 'datetime', nullable: true)]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true, columnDefinition: 'DATETIME on update CURRENT_TIMESTAMP')]
     private \DateTime $updated_at;
 
@@ -55,12 +47,24 @@ class GB
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
     }
+    
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    
     public function getTitle(): ?string
     {
         return $this->title;
@@ -101,7 +105,7 @@ class GB
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): static
+    public function setUserId(int $user_id): self
     {
         $this->user_id = $user_id;
 

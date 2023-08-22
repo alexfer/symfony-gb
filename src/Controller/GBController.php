@@ -32,18 +32,20 @@ class GBController extends AbstractController
         $gB = new GB();
 
         $form = $this->createForm(GBType::class, $gB);
-        $form->add('captcha', CaptchaType::class, [
-            'label_attr' => [
-                'class' => 'form-group mt-4 mb-4',
-                'for' => "captcha",
-        ]]);
+//        $form->add('captcha', CaptchaType::class, [
+//            'label_attr' => [
+//                'class' => 'form-group mt-4 mb-4',
+//                'for' => "captcha",
+//        ]]);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Entry has been created successfuly.');
-            $uuid = Uuid::v4();
-            $gB->setUuid($uuid);
-            $gB->setUserId($user->getId());
+            
+            $uuid = Uuid::v4();            
+            $gB->setUuid($uuid);            
+            $gB->setUser($user);
             $gB->setApproved(1);
 
             $entityManager->persist($gB);

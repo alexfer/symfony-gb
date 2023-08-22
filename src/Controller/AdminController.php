@@ -10,11 +10,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\GB;
+use App\Form\GBType;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
-    #[Route('/', name: 'app_admin')]
+    #[Route('/', name: 'app_admin_index')]
     public function index(GBRepository $gBRepository): Response
     {        
         return $this->render('admin/index.html.twig', [
@@ -25,8 +26,30 @@ class AdminController extends AbstractController
     #[Route('/{uuid}', name: 'app_admin_entry_show', methods: ['GET'])]
     public function show(GB $gB): Response
     {
-        return $this->render('admin/show.html.twig', [
+        return $this->render('admin/gb/show.html.twig', [
                     'gb' => $gB,
+        ]);
+    }
+    
+    #[Route('/{uuid}/edit', name: 'app_admin_entry_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(GBType::class, $gB);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Entry has been updated successfuly.');
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_entry_edit', [
+                        'action' => 'edit',
+                        'uuid' => $gB->getUuid()
+                            ], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/gb/edit.html.twig', [
+                    'g_b' => $gB,
+                    'form' => $form,
         ]);
     }
     
@@ -37,8 +60,7 @@ class AdminController extends AbstractController
         
         if (!$this->isCsrfTokenValid('delete', $token)) {
             return $this->redirectToRoute('app_admin');
-        }
-        
+        }        
         
         $entityManager->remove($gB);
         $entityManager->flush();

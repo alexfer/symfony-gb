@@ -19,8 +19,8 @@
                         <div class="dropdown-menu" aria-labelledby="userMenu">
                             <a class="dropdown-item" href="{{ path('app_profile') }}">{{ 'menu.user'|trans }}</a>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('app_admin') }}">{{ 'menu.admin'|trans }}</a>                                    
-                                <a class="dropdown-item" href="#">{{ 'menu.users'|trans }}</a>                                    
+                                <a class="dropdown-item" href="{{ path('app_admin_index') }}">{{ 'menu.admin'|trans }}</a>                                    
+                                <a class="dropdown-item" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>                                    
                             {% else %}
                                 <a class="dropdown-item" href="{{ path('app_g_b_index') }}">{{ 'user.entries'|trans }}</a>
                                 <a class="dropdown-item" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>

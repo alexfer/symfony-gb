@@ -1,0 +1,27 @@
+{# Bootstrap modal, see https://getbootstrap.com/docs/3.4/javascript/#modals #}
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="confirmationModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">            
+            <div class="modal-header">                
+                <h5 class="modal-title" id="confirmationModalLabel">{{ 'action.delete_user'|trans }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ 'delete_user_modal.body'|trans }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnNo" data-dismiss="modal">
+                    <i class="icon-ban"></i> {{ 'label.cancel'|trans }}
+                </button>
+                <form action="{{ url('app_admin_user_delete', {'id': id}) }}" method="post" data-confirmation="true" id="delete-form">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="icon-trash"></i> {{ 'label.delete_user'|trans }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

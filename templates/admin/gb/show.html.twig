@@ -9,6 +9,8 @@
         <div class="card">
             <div class="card-header">Show entry</div>
             <div class="card-body">
+                <b class="text-muted">User Name:</b>
+                <p>{{ gb.user.name }}</p>
                 <b class="text-muted">Title:</b>
                 <p>{{ gb.Title }}</p>
                 <b class="text-muted">Message:</b>
@@ -22,10 +24,10 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
                 <hr>                
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}">Reference to page</a> 
+                <a class="link-secondary" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}">Reference to page</a> 
                 <hr>
                 <div class="section">
-                    {{ include('admin/_delete_form.html.twig', {uuid: gb.uuid}, with_context = false) }}
+                    {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid}, with_context = false) }}
                 </div>
             </div>
         </div>

@@ -5,14 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\GBRepository;
 
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(GBRepository $gBRepository): Response
+    public function index(): Response
     {
-        return $this->render('gb/index.html.twig', [
-                    'g_bs' => $gBRepository->findBy([], ['id' => 'DESC']),
+        return $this->render('index/index.html.twig', [
+                    'summary' => [],
         ]);
     }
 }

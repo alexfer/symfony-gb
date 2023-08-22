@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GB Entries{% endblock %}
+{% block title %}Users{% endblock %}
 
 {% block body %}    
     <div class="container">
-        <h2 class="text-center mt-5 mb-3">GB Entries</h2>        
+        <h2 class="text-center mt-5 mb-3">Users</h2>        
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-secondary float-end" href="{{ path('app_g_b_new') }}"> 
+                <a class="btn btn-secondary float-end" href="{{ path('app_admin_user_new') }}"> 
                     Create
                 </a>
             </div>
@@ -18,28 +18,26 @@
                             <tr>
                                 <th>Id</th>
                                 <th>User Name</th>
-                                <th>Title</th>
+                                <th>Email</th>
                                 <th>Created At</th>
-                                <th>Updated At</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for gb in g_bs %}
+                            {% for user in users %}
                                 <tr>
-                                    <td>{{ gb.id }}</td>
-                                    <td>{{ gb.user.name }}</td>
-                                    <td>{{ gb.title }}</td>        
-                                    <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
-                                    <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>        
+                                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i') : '' }}</td>                                     
                                     <td class="text-center">
-                                        <a class="link-secondary" href="{{ path('app_admin_entry_edit', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
-                                        <a class="link-secondary" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
+                                        <a class="link-secondary" href="{{ path('app_admin_user_edit', {'id': user.id}) }}"><i class="icon-edit"></i></a> 
+                                        <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': user.id}) }}"><i class="icon-eye-open"></i></a>
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
+                                    <td colspan="5" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>

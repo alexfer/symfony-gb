@@ -18,6 +18,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
+                            <th>User Name</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th class="text-center">Actions</th>
@@ -28,6 +29,7 @@
                             <tr>
                                 <td>{{ gb.id }}</td>
                                 <td>{{ gb.title }}</td>        
+                                <td>{{ gb.user.name }}</td>
                                 <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
                                 <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                 <td class="text-center">
@@ -37,7 +39,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="5" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
+                                <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
