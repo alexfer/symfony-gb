@@ -23,15 +23,17 @@
                         </thead>
                         <tbody>
                             {% for gb in g_bs %}
-                                <tr>
+                                <tr{{ gb.approved == 0 ? ' class="table-muted text-muted"': '' }}>
                                     <td>{{ gb.id }}</td>
-                                    <td>{{ gb.user.name }}</td>
+                                    <td>
+                                        <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': gb.user.id}) }}">{{ gb.user.name }}</a>
+                                    </td>
                                     <td>{{ gb.title }}</td>        
                                     <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td> 
                                     <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                     <td class="text-center">
-                                        <a class="link-secondary" href="{{ path('app_admin_entry_edit', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
-                                        <a class="link-secondary" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_edit', {'uuid': gb.uuid}) }}"><i class="icon-edit"></i></a> 
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}"><i class="icon-eye-open"></i></a>
                                     </td>
                                 </tr>
                             {% else %}

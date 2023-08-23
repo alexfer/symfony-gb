@@ -100,6 +100,10 @@
                 <source>title.edit_user</source>
                 <target>Edit user</target>
             </trans-unit>
+            <trans-unit id="title.show_user">
+                <source>title.show_user</source>
+                <target>Show user</target>
+            </trans-unit>
             <trans-unit id="menu.users">
                 <source>menu.users</source>
                 <target>Users</target>

@@ -36,7 +36,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'User has been created successfuly.');
-            
+
             $user->setRoles(['ROLE_USER']);
             $user->setIsVerified(true);
             $user->setPassword(

@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Manage User{% endblock %}
+{% block title %}{{ 'title.show_user'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h2 class="text-center mt-5 mb-3">Show User</h2>
+    <div class="container">        
         {% include 'flashMessage/flashMessage.html.twig' %}        
-        <div class="card">
-            <div class="card-header">Manage User</div>
+        <div class="card border-secondary mt-5">
+            <div class="card-header">
+                {{ 'title.show_user'|trans }}
+            </div>
             <div class="card-body">
                 <b class="text-muted">User Name:</b>
                 <p>{{ user.name }}</p>
-                <b class="text-muted">Title:</b>
-                <p>{{ user.email }}</p>                
+                <b class="text-muted">Email:</b>
+                <p>{{ user.email }}</p>
+                <b class="text-muted">Roles:</b>
+                <p>{{ user.roles|join(', ') }}</p>                
                 <hr>
                 <div class="section">
                     {{ include('admin/user/_action_form.html.twig', {id: user.id}, with_context = false) }}

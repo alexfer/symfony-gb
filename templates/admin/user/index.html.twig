@@ -15,6 +15,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>User Name</th>
+                                <th>Roles</th>
                                 <th>Email</th>
                                 <th>Created At</th>
                                 <th class="text-center">Actions</th>
@@ -25,16 +26,17 @@
                                 <tr>
                                     <td>{{ user.id }}</td>
                                     <td>{{ user.name }}</td>
+                                    <td>{{ user.roles|join(', ') }}</td>
                                     <td>{{ user.email }}</td>        
                                     <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i') : '' }}</td>                                     
                                     <td class="text-center">
-                                        <a class="link-secondary" href="{{ path('app_admin_user_edit', {'id': user.id}) }}"><i class="icon-edit"></i></a> 
-                                        <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': user.id}) }}"><i class="icon-eye-open"></i></a>
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_user_edit', {'id': user.id}) }}"><i class="icon-edit"></i></a> 
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_user_show', {'id': user.id}) }}"><i class="icon-eye-open"></i></a>
                                     </td>
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="5" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
+                                    <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
