@@ -46,21 +46,23 @@ class UserFormType extends AbstractType
                         'Admin' => 'ROLE_ADMIN',
                         'User' => 'ROLE_USER',
                     ],
-                ])->add('is_verified', CheckboxType::class, [
-            'label' => 'Verified?',
-            'required' => false,
-        ]);
-
-        $builder->get('roles')
+                ])
+                ->add('is_verified', CheckboxType::class, [
+                    'label' => 'Verified?',
+                    'label_attr' => [
+                        'class' => 'form-check-label'
+                    ],
+                    'required' => false,                    
+                ])
+                ->get('roles')
                 ->addModelTransformer(new CallbackTransformer(
                                 function ($rolesArray) {
-                                    // transform the array to a string
                                     return count($rolesArray) ? $rolesArray[0] : null;
                                 },
-                                function ($rolesString) {                                    
+                                function ($rolesString) {
                                     return [$rolesString];
                                 }
-        ));
+        ));        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

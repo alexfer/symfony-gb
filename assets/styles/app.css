@@ -1,0 +1,15 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[1].use[1]!./assets/styles/app.css ***!
+  \**************************************************************************************************************/
+/* assets/styles/app.css */
+body {
+    background-color: lightgray;
+}
+.captcha_image {
+    margin-left: 20px;
+}
+.alert-danger ul {
+    list-style: none;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7QUFBQSwwQkFBMEI7QUFDMUI7SUFDSSwyQkFBMkI7QUFDL0I7QUFDQTtJQUNJLGlCQUFpQjtBQUNyQjtBQUNBO0lBQ0ksZ0JBQWdCO0FBQ3BCLEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9zeW1mb255LWdiLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qIGFzc2V0cy9zdHlsZXMvYXBwLmNzcyAqL1xuYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogbGlnaHRncmF5O1xufVxuLmNhcHRjaGFfaW1hZ2Uge1xuICAgIG1hcmdpbi1sZWZ0OiAyMHB4O1xufVxuLmFsZXJ0LWRhbmdlciB1bCB7XG4gICAgbGlzdC1zdHlsZTogbm9uZTtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

@@ -1,0 +1,6 @@
+fos_ck_editor:
+    configs:
+        main_config: 
+            toolbar: basic
+    base_path: "bundles/fosckeditor"
+    js_path:   "bundles/fosckeditor/ckeditor.js"

@@ -1,4 +1,4 @@
-{{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+{{ form_start(form) }}
 {% include 'flashMessage/flashMessage.html.twig' %}
 <div class="form-group">
     {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
@@ -12,9 +12,9 @@
 <div class="form-group">
     {{ form_row(form.roles, {'attr': {'class': 'form-control'}}) }}
 </div>
-<div class="form-check">
-  {{ form_row(form.is_verified, {'attr': {'class': 'form-check-input'}}) }}
-  
+<div class="form-group">        
+    {{ form_widget(form.is_verified) }}
+    {{ form_label(form.is_verified) }}    
 </div>
 <button class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

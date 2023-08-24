@@ -1,18 +1,70 @@
+"use strict";
 (self["webpackChunksymfony_gb"] = self["webpackChunksymfony_gb"] || []).push([["app"],{
 
 /***/ "./assets/app.js":
 /*!***********************!*\
   !*** ./assets/app.js ***!
   \***********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: Cannot find package '@babel/plugin-proposal-class-properties' imported from /var/www/symfony-gb/babel-virtual-resolve-base.js\n    at __node_internal_ (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:233:9)\n    at new NodeError (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:203:5)\n    at packageResolve (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:873:9)\n    at moduleResolve (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:902:20)\n    at defaultResolve (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:985:15)\n    at resolve (/var/www/symfony-gb/node_modules/@babel/core/lib/vendor/import-meta-resolve.js:999:12)\n    at resolve (/var/www/symfony-gb/node_modules/@babel/core/lib/config/files/import-meta-resolve.js:13:10)\n    at tryImportMetaResolve (/var/www/symfony-gb/node_modules/@babel/core/lib/config/files/plugins.js:137:45)\n    at resolveStandardizedNameForImport (/var/www/symfony-gb/node_modules/@babel/core/lib/config/files/plugins.js:159:19)\n    at resolveStandardizedName (/var/www/symfony-gb/node_modules/@babel/core/lib/config/files/plugins.js:168:12)\n    at loadPlugin (/var/www/symfony-gb/node_modules/@babel/core/lib/config/files/plugins.js:47:20)\n    at loadPlugin.next (<anonymous>)\n    at createDescriptor (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-descriptors.js:140:16)\n    at createDescriptor.next (<anonymous>)\n    at step (/var/www/symfony-gb/node_modules/gensync/index.js:261:32)\n    at evaluateAsync (/var/www/symfony-gb/node_modules/gensync/index.js:291:5)\n    at /var/www/symfony-gb/node_modules/gensync/index.js:44:11\n    at Array.forEach (<anonymous>)\n    at Function.async (/var/www/symfony-gb/node_modules/gensync/index.js:43:15)\n    at Function.all (/var/www/symfony-gb/node_modules/gensync/index.js:216:13)\n    at Generator.next (<anonymous>)\n    at createDescriptors (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-descriptors.js:102:41)\n    at createDescriptors.next (<anonymous>)\n    at createPluginDescriptors (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-descriptors.js:99:17)\n    at createPluginDescriptors.next (<anonymous>)\n    at /var/www/symfony-gb/node_modules/@babel/core/lib/config/config-descriptors.js:65:32\n    at Generator.next (<anonymous>)\n    at Function.<anonymous> (/var/www/symfony-gb/node_modules/@babel/core/lib/gensync-utils/async.js:21:3)\n    at Generator.next (<anonymous>)\n    at step (/var/www/symfony-gb/node_modules/gensync/index.js:269:25)\n    at evaluateAsync (/var/www/symfony-gb/node_modules/gensync/index.js:291:5)\n    at Function.errback (/var/www/symfony-gb/node_modules/gensync/index.js:113:7)\n    at errback (/var/www/symfony-gb/node_modules/@babel/core/lib/gensync-utils/async.js:66:18)\n    at async (/var/www/symfony-gb/node_modules/gensync/index.js:188:31)\n    at onFirstPause (/var/www/symfony-gb/node_modules/gensync/index.js:216:13)\n    at Generator.next (<anonymous>)\n    at cachedFunction (/var/www/symfony-gb/node_modules/@babel/core/lib/config/caching.js:52:46)\n    at cachedFunction.next (<anonymous>)\n    at mergeChainOpts (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-chain.js:350:34)\n    at mergeChainOpts.next (<anonymous>)\n    at chainWalker (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-chain.js:317:14)\n    at chainWalker.next (<anonymous>)\n    at buildRootChain (/var/www/symfony-gb/node_modules/@babel/core/lib/config/config-chain.js:57:36)\n    at buildRootChain.next (<anonymous>)\n    at loadPrivatePartialConfig (/var/www/symfony-gb/node_modules/@babel/core/lib/config/partial.js:79:62)\n    at loadPrivatePartialConfig.next (<anonymous>)\n    at /var/www/symfony-gb/node_modules/@babel/core/lib/config/partial.js:122:25\n    at Generator.next (<anonymous>)\n    at step (/var/www/symfony-gb/node_modules/gensync/index.js:269:25)\n    at evaluateAsync (/var/www/symfony-gb/node_modules/gensync/index.js:291:5)\n    at /var/www/symfony-gb/node_modules/gensync/index.js:93:9\n    at new Promise (<anonymous>)\n    at async (/var/www/symfony-gb/node_modules/gensync/index.js:92:14)\n    at Object.<anonymous> (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:126:26)\n    at Generator.next (<anonymous>)\n    at asyncGeneratorStep (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:3:103)\n    at _next (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:4:194)\n    at /var/www/symfony-gb/node_modules/babel-loader/lib/index.js:4:364\n    at new Promise (<anonymous>)\n    at Object.<anonymous> (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:4:97)\n    at Object._loader (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:210:18)\n    at Object.loader (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:48:18)\n    at Object.<anonymous> (/var/www/symfony-gb/node_modules/babel-loader/lib/index.js:44:12)");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _styles_app_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/app.css */ "./assets/styles/app.css");
+/* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
+/* harmony import */ var font_awesome_css_font_awesome_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! font-awesome/css/font-awesome.css */ "./node_modules/font-awesome/css/font-awesome.css");
+/* harmony import */ var bootstrap_js_dist_alert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/js/dist/alert */ "./node_modules/bootstrap/js/dist/alert.js");
+/* harmony import */ var bootstrap_js_dist_alert__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_alert__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/js/dist/collapse */ "./node_modules/bootstrap/js/dist/collapse.js");
+/* harmony import */ var bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_collapse__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap/js/dist/dropdown */ "./node_modules/bootstrap/js/dist/dropdown.js");
+/* harmony import */ var bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_dropdown__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var bootstrap_js_dist_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! bootstrap/js/dist/tab */ "./node_modules/bootstrap/js/dist/tab.js");
+/* harmony import */ var bootstrap_js_dist_tab__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_tab__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! bootstrap/js/dist/modal */ "./node_modules/bootstrap/js/dist/modal.js");
+/* harmony import */ var bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(bootstrap_js_dist_modal__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_9__);
+// assets/app.js
+/*
+ * Welcome to your app's main JavaScript file!
+ *
+ * We recommend including the built version of this JavaScript file
+ * (and its CSS file) in your base layout (base.html.twig).
+ */
+
+// any CSS you import will output into a single css file (app.css in this case)
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./assets/styles/app.css":
+/*!*******************************!*\
+  !*** ./assets/styles/app.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ })
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__("./assets/app.js"));
+/******/ __webpack_require__.O(0, ["vendors-node_modules_bootstrap_dist_js_bootstrap_js-node_modules_bootstrap_js_dist_alert_js-n-5e5768"], () => (__webpack_exec__("./assets/app.js")));
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQzBCO0FBRVA7QUFDdUI7QUFDQztBQUNWO0FBQ0c7QUFDQTtBQUNMO0FBQ0U7QUFDbEI7Ozs7Ozs7Ozs7OztBQ25CZiIsInNvdXJjZXMiOlsid2VicGFjazovL3N5bWZvbnktZ2IvLi9hc3NldHMvYXBwLmpzIiwid2VicGFjazovL3N5bWZvbnktZ2IvLi9hc3NldHMvc3R5bGVzL2FwcC5jc3M/M2ZiYSJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBhc3NldHMvYXBwLmpzXG4vKlxuICogV2VsY29tZSB0byB5b3VyIGFwcCdzIG1haW4gSmF2YVNjcmlwdCBmaWxlIVxuICpcbiAqIFdlIHJlY29tbWVuZCBpbmNsdWRpbmcgdGhlIGJ1aWx0IHZlcnNpb24gb2YgdGhpcyBKYXZhU2NyaXB0IGZpbGVcbiAqIChhbmQgaXRzIENTUyBmaWxlKSBpbiB5b3VyIGJhc2UgbGF5b3V0IChiYXNlLmh0bWwudHdpZykuXG4gKi9cblxuLy8gYW55IENTUyB5b3UgaW1wb3J0IHdpbGwgb3V0cHV0IGludG8gYSBzaW5nbGUgY3NzIGZpbGUgKGFwcC5jc3MgaW4gdGhpcyBjYXNlKVxuaW1wb3J0ICcuL3N0eWxlcy9hcHAuY3NzJztcblxuaW1wb3J0ICdwb3BwZXIuanMnO1xuaW1wb3J0ICdib290c3RyYXAvZGlzdC9jc3MvYm9vdHN0cmFwLmNzcyc7XG5pbXBvcnQgJ2ZvbnQtYXdlc29tZS9jc3MvZm9udC1hd2Vzb21lLmNzcyc7XG5pbXBvcnQgJ2Jvb3RzdHJhcC9qcy9kaXN0L2FsZXJ0JztcbmltcG9ydCAnYm9vdHN0cmFwL2pzL2Rpc3QvY29sbGFwc2UnO1xuaW1wb3J0ICdib290c3RyYXAvanMvZGlzdC9kcm9wZG93bic7XG5pbXBvcnQgJ2Jvb3RzdHJhcC9qcy9kaXN0L3RhYic7XG5pbXBvcnQgJ2Jvb3RzdHJhcC9qcy9kaXN0L21vZGFsJztcbmltcG9ydCAnanF1ZXJ5J1xuaW1wb3J0ICdib290c3RyYXAnOyIsIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpblxuZXhwb3J0IHt9OyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==
