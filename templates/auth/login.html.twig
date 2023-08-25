@@ -1,41 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'action.login'|trans }}<{% endblock %}
+{% block title %}{{ 'action.login'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="card border-secondary mt-5">        
-            <div class="card-header">
-                <h5>{{ 'action.login'|trans }}</h5>
-            </div>
-            <div class="card">         
-                {% if error %}
-                    <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-                <form action="{{ path('app_login') }}" method="post">
-                    <div class="card-body">                    
-                        <div class="form-group">
-                            <label for="username" required="required">Email:</label>
-                            <input required="required" class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" required="required">Password:</label>
-                            <input required="required" class="form-control" type="password" id="password" name="_password"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-check-label" for="remember_me">Keep me logged in</label>
-                            <input class="form-check-input" type="checkbox" id="remember_me" name="_remember_me" checked>
-                        </div>
-
-                        {# If you want to control the URL the user is redirected to on success #}
-                        <input type="hidden" name="_target_path" value="{{ path('app_index') }}"/>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <div class="container">        
+        <form action="{{ path('app_login') }}" method="post">
+            {% if error %}
+                <div class="alert alert-danger mt-5" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="card border-secondary mt-5">                        
+                <div class="card-header">
+                    <h5>{{ 'action.login'|trans }}</h5>
+                </div>            
+                <div class="card-body">     
+                    <div class="form-group">
+                        <label for="username" required="required">Email:</label>
+                        <input required="required" class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
                     </div>
-                    <div class="card-footer">
-                        <button class="btn btn-primary" type="submit">{{ 'action.login'|trans }}</button>
+                    <div class="form-group">
+                        <label for="password" required="required">Password:</label>
+                        <input required="required" class="form-control" type="password" id="password" name="_password"/>
                     </div>
-                </form>                
+                    <div class="form-group">
+                        <label class="form-check-label" for="remember_me">Keep me logged in</label>
+                        <input class="form-check-input" type="checkbox" id="remember_me" name="_remember_me" checked>
+                    </div>
+                    <input type="hidden" name="_target_path" value="{{ path('app_index') }}"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">                                    
+                </div>     
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">{{ 'action.login'|trans }}</button>
+                </div> 
             </div>
-        </div>
+        </form>                
     </div>
 {% endblock %}
