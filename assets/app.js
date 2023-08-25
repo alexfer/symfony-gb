@@ -12,10 +12,5 @@ import './styles/app.css';
 import 'popper.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
-import 'bootstrap/js/dist/alert';
-import 'bootstrap/js/dist/collapse';
-import 'bootstrap/js/dist/dropdown';
-import 'bootstrap/js/dist/tab';
-import 'bootstrap/js/dist/modal';
-import 'jquery'
+import 'jquery';
 import 'bootstrap';

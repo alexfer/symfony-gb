@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Repository\UserRepository;
-use App\Form\UserFormType;
+use App\Form\User\FormType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/manage/user')]
@@ -30,7 +30,7 @@ class UserController extends AbstractController
     {
         $user = new User();
 
-        $form = $this->createForm(UserFormType::class, $user);
+        $form = $this->createForm(FormType::class, $user);
 
         $form->handleRequest($request);
 
@@ -63,7 +63,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(UserFormType::class, $user);
+        $form = $this->createForm(FormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

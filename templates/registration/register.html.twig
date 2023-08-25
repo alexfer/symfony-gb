@@ -4,18 +4,18 @@
 
 {% block body %}
     <div class="container">
+        {{ form_start(registrationForm) }}
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}    
+        {% if form_errors(registrationForm) %}
+            <div class="alert alert-danger pb-0" role="alert">{{ form_errors(registrationForm) }}</div>
+        {% endif %}
         <div class="card border-secondary mt-5">        
             <div class="card-header">
                 <h5>{{ 'title.register'|trans }}</h5>
             </div>
-            <div class="card-body">
-                {% for flash_error in app.flashes('verify_email_error') %}
-                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-                {% endfor %}    
-                {% if form_errors(registrationForm) %}
-                    <div class="alert alert-danger pb-0" role="alert">{{ form_errors(registrationForm) }}</div>
-                {% endif %}
-                {{ form_start(registrationForm) }}
+            <div class="card-body">                                
                 <div class="form-group">
                     {{ form_row(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
                 </div>
@@ -31,10 +31,9 @@
                 <input type="hidden" name="_target_path" value="{{ path('app_g_b_index') }}"/>
             </div>  
             <div class="card-footer">
-                <button class="btn {{ button_color|default('btn-primary') }}">{{ button_label|default('Register') }}</button>
-            </div
+                <button class="float-right btn {{ button_color|default('btn-primary') }}">{{ button_label|default('Register') }}</button>
+            </div>
         </div>        
         {{ form_end(registrationForm) }}         
     </div>
-</div> 
 {% endblock %}
