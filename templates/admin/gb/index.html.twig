@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                             {% for gb in g_bs %}
-                                <tr{{ gb.approved == 0 ? ' class="table-muted text-muted"': '' }}>
+                                <tr{{ gb.approved == 0 ? ' class="bg-warning text-muted"': '' }}>
                                     <td>{{ gb.id }}</td>
                                     <td>
                                         <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': gb.user.id}) }}">{{ gb.user.name }}</a>

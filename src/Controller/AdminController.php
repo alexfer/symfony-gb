@@ -42,8 +42,7 @@ class AdminController extends AbstractController
             $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_entry_edit', [
-                        'action' => 'edit',
+            return $this->redirectToRoute('app_admin_entry_edit', [                        
                         'uuid' => $gB->getUuid()
                             ], Response::HTTP_SEE_OTHER);
         }

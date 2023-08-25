@@ -46,7 +46,7 @@ class GBController extends AbstractController
             $uuid = Uuid::v4();            
             $gB->setUuid($uuid);            
             $gB->setUser($user);
-            $gB->setApproved(1);
+            $gB->setApproved(0);
 
             $entityManager->persist($gB);
             $entityManager->flush();
