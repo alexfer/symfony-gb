@@ -25,9 +25,10 @@
                 <div class="form-group">
                     {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
                 </div>
-                <div class="form-check mt-3">
-                    {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
-                </div>    
+                <div class="form-group">        
+                    {{ form_widget(registrationForm.agreeTerms) }}
+                    {{ form_label(registrationForm.agreeTerms) }}    
+                </div>                
                 <input type="hidden" name="_target_path" value="{{ path('app_g_b_index') }}"/>
             </div>  
             <div class="card-footer">

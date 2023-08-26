@@ -39,6 +39,7 @@
     },
     "dependencies": {
         "@babel/core": "^7.22.10",
+        "ckeditor4": "^4.23.0",
         "node-sass": "^9.0.0",
         "sass-loader": "^13.3.2"
     }
