@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'http_error.name'|trans({ 'status_code': 404 }) }}{% endblock %}
+
+{% block body %}
+    <div class="container">        
+        <div class="card border-secondary mt-5">
+            <div class="card-header">
+                <h5 class="text-danger">{{ 'http_error.name'|trans({ 'status_code': status_code }) }}</h5>                        
+            </div>
+            <div class="card-body">
+                <p class="lead">
+                    {{ 'http_error_404.description'|trans }}
+                </p>
+                <p>
+                    {{ 'http_error.description'|trans({ 'status_code': status_code }) }}
+                </p>
+                <p>
+                <p>
+                    {{ 'http_error.suggestion'|trans({ 'url': path('app_index') })|raw }}
+                </p>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
