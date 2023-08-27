@@ -24,8 +24,9 @@ class GB
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $uuid = null;
-    
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'gb')]
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false, name: "user_id", referencedColumnName: "id", onDelete: "CASCADE")]
     private User $user;
 
     #[ORM\Column()]
@@ -45,7 +46,7 @@ class GB
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
     }
-    
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -62,7 +63,7 @@ class GB
     {
         return $this->id;
     }
-    
+
     public function getTitle(): ?string
     {
         return $this->title;
