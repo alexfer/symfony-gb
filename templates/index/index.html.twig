@@ -4,14 +4,53 @@
 
 {% block body %}
     <div class="container">          
-        <div class="card border-secondary mt-5">
-            <div class="card-header">
-                <h5>{{ 'label.summary'|trans }}</h5>        
+        <div class="row mt-5">
+            <div class="col-sm-6">                
+                <div class="card border-secondary">
+                    <div class="card-header">
+                        New Entries
+                    </div>
+                    <div class="card-body">                                                                        
+                        {% for entry in entries  %}   
+                            <small class="text-muted">[{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i') : '' }}]</small>
+                            <a class="text-secondary" href="">
+                                {{ entry.title }}
+                            </a>
+                            <p class="card-text text-small"> 
+                            <hr>
+                            {{ entry.message }}
+                            </p>
+                            <small>Author: {{ entry.user.name }}</small>
+                            <hr>
+                        {% endfor %}                        
+                        <a href="#" class="text-info pull-right">Vew All</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">    
-                This friendly messages is coming    
+            <div class="col-sm-6">
+                <div class="card border-secondary"> 
+                    <div class="card-header">
+                        Last Comments
+                    </div>
+                    <div class="card-body">                                                                        
+                        {% for comment in comments  %}   
+                            <small class="text-muted">[{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i') : '' }}]</small>
+                            <span>
+                                <small>Author: {{ comment.author }}</small>                                
+                            </span>
+                            <p class="card-text text-small"> 
+                            <hr>
+                            {{ comment.content|striptags|slice(0, 150) }}...
+                            </p>
+                            <a class="text-secondary" href="{{ path('entry_show') }}">
+                                {{ comment.gb.title }}
+                            </a>
+                            <hr>
+                        {% endfor %}                        
+                        <a href="#" class="text-info pull-right">Vew All</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

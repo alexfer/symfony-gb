@@ -90,7 +90,7 @@ class Comment
 
     public function getGb(): ?GB
     {
-        return $this->post;
+        return $this->gb;
     }
 
     public function setGB(GB $gb): void
