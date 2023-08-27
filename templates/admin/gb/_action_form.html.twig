@@ -1,9 +1,20 @@
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmationModal">
-    <i class="icon-trash"></i>
+<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmationModal">
+    <i class="fa fa-trash"></i>
     {{ 'action.delete_entry'|trans }}
 </button>
-<a href="{{ path('app_admin_entry_edit', {'uuid': uuid}) }}" class="btn btn-warning" role="button">
-    <i class="icon-edit"></i>
+<a href="{{ path('app_admin_entry_edit', {'uuid': uuid}) }}" class="btn btn-outline-warning" role="button">
+    <i class="fa fa-pencil-square-o"></i>
     {{ 'action.edit'|trans }}
 </a>
+{% if  not status %}
+    <a href="{{ path('app_admin_entry_approve', {'uuid': uuid}) }}" class="btn btn-outline-success" role="button">
+        <i class="fa fa-plus-square-o"></i>
+        {{ 'title.approve_entry'|trans }}
+    </a>
+{% else %}
+    <a href="{{ path('app_admin_entry_reject', {'uuid': uuid}) }}" class="btn btn-outline-secondary" role="button">
+        <i class="fa fa-minus-square-o"></i>
+        {{ 'title.reject_entry'|trans }}
+    </a>
+{% endif %}
 {{ include('admin/gb/_delete_confirmation.html.twig') }}    

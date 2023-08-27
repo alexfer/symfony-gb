@@ -87,7 +87,7 @@
             <trans-unit id="title.edit_entry">
                 <source>title.edit_entry</source>
                 <target>Edit entry</target>
-            </trans-unit>
+            </trans-unit>            
             <trans-unit id="title.add_comment">
                 <source>title.add_comment</source>
                 <target>Add a comment</target>
@@ -140,6 +140,22 @@
             <trans-unit id="action.save">
                 <source>action.save</source>
                 <target>Save changes</target>
+            </trans-unit>
+            <trans-unit id="title.approve_entry">
+                <source>title.approve_entry</source>
+                <target>Approve</target>
+            </trans-unit>
+            <trans-unit id="title.reject_entry">
+                <source>title.reject_entry</source>
+                <target>Reject</target>
+            </trans-unit>
+            <trans-unit id="message.approved_entry_successfully">
+                <source>message.approved_entry_successfully</source>
+                <target>This entry has been approved successfully</target>
+            </trans-unit>
+            <trans-unit id="message.rejected_entry_successfully">
+                <source>message.rejected_entry_successfully</source>
+                <target>This entry has been rejected successfully</target>
             </trans-unit>
             <trans-unit id="action.delete_entry">
                 <source>action.delete_entry</source>

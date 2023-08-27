@@ -94,7 +94,7 @@ class AppFixtures extends Fixture
     {
         return [
             // $userData = [$name, $password, $email, $roles];
-            ['AlexanderSh', '7212104', 'alexandershtyher@gmail.com', [User::ROLE_ADMIN]],
+            ['AlexanderSh', '7212104', 'alexandershtyher@gmai.com', [User::ROLE_ADMIN]],
             ['Autoportal', '7212104', 'autoportal@email.ua', [User::ROLE_USER]],
             ['TestUser', '7212104', 'test@example.com', [User::ROLE_USER]],
         ];

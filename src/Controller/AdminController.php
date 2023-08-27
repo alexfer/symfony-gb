@@ -69,4 +69,28 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_admin');
     }
+    
+    #[Route('/{uuid}/approve', name: 'app_admin_entry_approve', methods: ['GET'])]
+    public function approve(Request $request, GB $gB, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    {        
+        $gB->setApproved(1);
+        $entityManager->flush();
+        
+        $this->addFlash('success', $translator->trans('message.approved_entry_successfully'));
+        return $this->redirectToRoute('app_admin_entry_show', [                        
+                        'uuid' => $gB->getUuid()
+                            ], Response::HTTP_SEE_OTHER);
+    }
+    
+    #[Route('/{uuid}/reject', name: 'app_admin_entry_reject', methods: ['GET'])]
+    public function reject(Request $request, GB $gB, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    {
+        $gB->setApproved(0);
+        $entityManager->flush();
+        
+        $this->addFlash('success', $translator->trans('message.rejected_entry_successfully'));
+        return $this->redirectToRoute('app_admin_entry_show', [                        
+                        'uuid' => $gB->getUuid()
+                            ], Response::HTTP_SEE_OTHER);
+    }
 }

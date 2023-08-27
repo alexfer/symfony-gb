@@ -3,12 +3,15 @@
 {% block title %}Show Entry{% endblock %}
 
 {% block body %}
-    <div class="container">            
+    <div class="container">   
+        {% include 'flashMessage/flashMessage.html.twig' %} 
         <div class="card border-secondary mt-5">
             <div class="card-header">
                  <h5>{{ 'action.show_entry'|trans }}</h5>
             </div>
             <div class="card-body">
+                <b class="text-muted">Status:</b>
+                <p class="text-{{ gb.Approved == true ? 'info' : 'danger' }}">{{ gb.Approved ? 'Approved' : 'Waiting to approve' }}</p>
                 <b class="text-muted">User Name:</b>
                 <p>{{ gb.user.name }}</p>
                 <b class="text-muted">Title:</b>
@@ -27,7 +30,7 @@
                 <a class="link-secondary" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}">Reference to page</a> 
                 <hr>
                 <div class="section">
-                    {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid}, with_context = false) }}
+                    {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid, status: gb.approved}, with_context = false) }}
                 </div>
             </div>
         </div>
