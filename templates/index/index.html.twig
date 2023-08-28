@@ -13,7 +13,7 @@
                     <div class="card-body">                                                                        
                         {% for entry in entries  %}   
                             <small class="text-muted">[{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i') : '' }}]</small>
-                            <a class="text-secondary" href="">
+                            <a class="text-secondary" href="{{ path('app_entry_show', {uuid: entry.uuid}) }}">
                                 {{ entry.title }}
                             </a>
                             <p class="card-text text-small"> 
@@ -32,22 +32,20 @@
                     <div class="card-header">
                         Last Comments
                     </div>
-                    <div class="card-body">                                                                        
-                        {% for comment in comments  %}   
-                            <small class="text-muted">[{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i') : '' }}]</small>
-                            <span>
-                                <small>Author: {{ comment.author }}</small>                                
-                            </span>
-                            <p class="card-text text-small"> 
-                            <hr>
-                            {{ comment.content|striptags|slice(0, 150) }}...
-                            </p>
-                            <a class="text-secondary" href="{{ path('entry_show') }}">
-                                {{ comment.gb.title }}
-                            </a>
-                            <hr>
-                        {% endfor %}                        
-                        <a href="#" class="text-info pull-right">Vew All</a>
+                    <div class="comment-widgets">
+                        {% for comment in comments %}
+                            <div class="d-flex flex-row comment-row p-3">
+                                <div class="p-2"><img src="{{ asset('images/avatar.png') }}" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="comment-text w-100">
+                                    <h6 class="font-medium">{{ comment.author }}</h6> 
+                                    <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
+                                    <div class="comment-footer">                                         
+                                        <a href="{{ path('app_entry_show', {uuid: comment.gb.uuid}) }}" class="text-info">{{ comment.gb.title }}</a>                                         
+                                        <small class="text-muted float-right">{{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
+                                    </div>
+                                </div>
+                            </div> 
+                        {% endfor %}
                     </div>
                 </div>
             </div>

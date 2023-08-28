@@ -27,7 +27,7 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
                 <hr>                
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}">Reference to page</a> 
+                <a class="link-secondary" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a> 
                 <hr>
                 <div class="section">
                     {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid, status: gb.approved}, with_context = false) }}

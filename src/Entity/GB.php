@@ -5,7 +5,14 @@ namespace App\Entity;
 use App\Repository\GBRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
-use App\Entity\User;
+use Doctrine\Common\Collections\{
+    ArrayCollection,
+    Collection,
+};
+use App\Entity\{
+    User,
+    Comment,
+};
 
 #[ORM\Entity(repositoryClass: GBRepository::class)]
 class GB
@@ -34,6 +41,13 @@ class GB
 
     #[ORM\Column]
     private ?int $approved = null;
+    
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'gb', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OrderBy(['created_at' => 'DESC'])]
+    private Collection $comments;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private \DateTime $created_at;
@@ -45,6 +59,7 @@ class GB
     {
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
     public function getUser(): ?User
@@ -131,7 +146,6 @@ class GB
     public function setCreatedAt(\DateTime $created_at): void
     {
         $this->created_at = $created_at;
-        //return $this;
     }
 
     public function getUpdatedAt(): \DateTime
@@ -142,7 +156,26 @@ class GB
     public function setUpdatedAt(\DateTime $updated_at): void
     {
         $this->updated_at = $updated_at;
+    }
 
-        //return $this;
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): void
+    {
+        $comment->setContent($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+        }
+    }
+
+    public function removeComment(Comment $comment): void
+    {
+        $this->comments->removeElement($comment);
     }
 }
