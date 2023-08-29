@@ -41,7 +41,7 @@ class Comment
     private ?int $gb_id = null;
 
     #[ORM\Column(options: ['default' => 0])]
-    private ?int $approved = null;
+    private ?int $approved = 0;
 
     public function __construct()
     {

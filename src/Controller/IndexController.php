@@ -49,8 +49,6 @@ class IndexController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->addFlash('success', 'Comment has been published successfuly.');
-            // remove this after tests
-            $comment->setApproved(1);
 
             $entityManager->persist($comment);
             $entityManager->flush();
