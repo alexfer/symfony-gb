@@ -36,12 +36,16 @@ class IndexController extends AbstractController
             Request $request,
             GB $gB,
             CommentRepository $commentRepository,
-            UserInterface $user,
             EntityManagerInterface $entityManager
     ): Response
     {
         $comment = new Comment();
         $comment->setGb($gB);
+
+        $token = $this->container->get('security.token_storage')->getToken();
+        $condition = $token !== null ? [] : ['approved' => true];
+
+        $comments = $commentRepository->findBy($condition, ['created_at' => 'DESC'], 10);
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -61,13 +65,14 @@ class IndexController extends AbstractController
         return $this->render('index/show.html.twig', [
                     'comment_form' => $form->createView(),
                     'gb' => $gB,
-                    'comments' => $user->getId() ? $commentRepository->findBy([], ['created_at' => 'DESC'], 10) : $commentRepository->findApproved($gB->getId()),
+                    'totalComments' => $commentRepository->countComments($comment->getGb()->getId(), $token ? 0 : 1),
+                    'comments' => $comments,
+                        //'comments' => $commentRepository->findBy([], ['created_at' => 'DESC'], 10),
         ]);
     }
 
     #[Route('/publish-comment/{id}', name: 'app_comment_publish', methods: ['GET'])]
     public function publish(
-            GB $gB,
             Comment $comment,
             UserInterface $user,
             EntityManagerInterface $entityManager,
@@ -77,10 +82,30 @@ class IndexController extends AbstractController
         if ($comment->getGb()->getUserId() != $user->getId()) {
             $this->denyAccessUnlessGranted($user->getRoles(), $comment, $translator->trans('http_error_403.description'));
         }
-        
+
         $comment->setApproved(1);
 
         $entityManager->persist($comment);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_entry_show', [
+                    'uuid' => $comment->getGb()->getUuid(),
+                        ], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/delete-comment/{id}', name: 'app_comment_delete', methods: ['GET'])]
+    public function delete(
+            Comment $comment,
+            UserInterface $user,
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator
+    ): Response
+    {
+        if ($comment->getGb()->getUserId() != $user->getId()) {
+            $this->denyAccessUnlessGranted($user->getRoles(), $comment, $translator->trans('http_error_403.description'));
+        }
+
+        $entityManager->remove($comment);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_entry_show', [

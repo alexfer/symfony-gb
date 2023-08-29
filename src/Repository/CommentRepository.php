@@ -25,16 +25,15 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * @return Comment[] Returns an array of Comment objects
      */
-    public function findApproved($id): array
+    public function countComments($id, int $approved = 1)
     {
         return $this->createQueryBuilder('c')
-                        ->andWhere('c.approved = :val')
-                        ->setParameter('val', 0)
+                        ->select('count(c.id)')
+                        ->andWhere('c.approved = :approved')
+                        ->setParameter('approved', $approved)
                         ->andWhere('c.gb_id = :gb_id')
                         ->setParameter('gb_id', $id)
-                        ->orderBy('c.created_at', 'DESC')
-                        ->setMaxResults(10)
                         ->getQuery()
-                        ->getResult();
+                        ->getSingleScalarResult();
     }
 }

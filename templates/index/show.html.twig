@@ -22,7 +22,7 @@
                             </li>
                             <li class="list-inline-item">|</li>
                             <li class="list-inline-item">
-                                <span><i class="fa fa-comment"></i> {{ gb.comments.count }} comments</span>
+                                <span><i class="fa fa-comment"></i> {{ totalComments }} comments</span>
                             <li class="list-inline-item">|</li>
                             <li class="list-inline-item">
                                 <span><i class="fa fa-facebook-square"></i></span>
@@ -64,7 +64,7 @@
     <div class="row d-flex justify-content-center mt-1 mb-100">
         <div class="container">
             <div class="card mt-3">
-                {% if gb.comments.count %}
+                {% if totalComments %}
                     <div class="comment-widgets">
                         {% for comment in comments %}
                             <div class="d-flex flex-row comment-row p-3 border-bottom">
@@ -74,8 +74,8 @@
                                     <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
                                     <div class="comment-footer">
                                         {% if not comment.approved %}
-                                            {% if app.user and app.user.id == gb.user.id or is_granted('ROLE_ADMIN') %}
-                                                <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a>
+                                            {% if app.user and app.user.id == gb.user.id and is_granted('ROLE_USER') %}
+                                                <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a> <a href="{{ path('app_comment_delete', {id: comment.id}) }}" role="button" class="btn btn-outline-danger btn-sm">{{ 'action.delete_comment'|trans }}</a>
                                             {% endif %}
                                         {% endif %}
                                         <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
@@ -85,7 +85,9 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <div class="comment-widgets text-center pt-3 text-secondary">{{ 'entry.no_comments'|trans }}</div>
+                    <div class="comment-widgets">
+                        <div class="comment-widgets text-center pt-3 text-secondary">{{ 'entry.no_comments'|trans }}</div>
+                    </div>
                 {% endif %}
             </div>
         </div>
