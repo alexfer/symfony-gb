@@ -1,0 +1,15 @@
+{{ form_start(comment_form) }}
+<div class="form-group">
+    {{ form_row(comment_form.author, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_row(comment_form.email, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_row(comment_form.content, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_row(comment_form.captcha, {'attr': {'class': 'form-control '}}) }}
+</div>
+<button type="submit" class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('Publish') }}</button>
+{{ form_end(comment_form) }}
