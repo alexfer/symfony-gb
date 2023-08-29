@@ -41,7 +41,7 @@ class GB
 
     #[ORM\Column]
     private ?int $approved = null;
-    
+
     /**
      * @var Collection<int, Comment>
      */
@@ -164,18 +164,5 @@ class GB
     public function getComments(): Collection
     {
         return $this->comments;
-    }
-
-    public function addComment(Comment $comment): void
-    {
-        $comment->setContent($this);
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-        }
-    }
-
-    public function removeComment(Comment $comment): void
-    {
-        $this->comments->removeElement($comment);
     }
 }

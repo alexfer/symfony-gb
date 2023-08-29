@@ -51,7 +51,7 @@ body{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin: 10px 0
+    margin: 10px 0;
 }
 .p-2{
     padding: 0.5rem !important
@@ -65,14 +65,19 @@ body{
 .m-b-15{
     margin-bottom: 15px
 }
+.media-body.bg-light {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
 .comment-widgets .comment-row:hover{
     background: rgba(0, 0, 0, 0.05)
 }
 .captcha_image {
     margin-left: 20px;
+    margin-bottom: 20px;
 }
 .alert-danger ul {
     list-style: none;
+    padding: 0;
 }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7QUFBQSwwQkFBMEI7QUFDMUI7SUFDSSwyQkFBMkI7QUFDL0I7QUFDQTtJQUNJLGlCQUFpQjtBQUNyQjtBQUNBO0lBQ0ksZ0JBQWdCO0FBQ3BCLEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9zeW1mb255LWdiLy4vYXNzZXRzL3N0eWxlcy9hcHAuY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qIGFzc2V0cy9zdHlsZXMvYXBwLmNzcyAqL1xuYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogbGlnaHRncmF5O1xufVxuLmNhcHRjaGFfaW1hZ2Uge1xuICAgIG1hcmdpbi1sZWZ0OiAyMHB4O1xufVxuLmFsZXJ0LWRhbmdlciB1bCB7XG4gICAgbGlzdC1zdHlsZTogbm9uZTtcbn0iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

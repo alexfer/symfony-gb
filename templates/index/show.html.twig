@@ -3,44 +3,83 @@
 {% block title %}{{ gb.Title }}{% endblock %}
 
 {% block body %}
-    <div class="container">                
+    <div class="container">
         <div class="card border-secondary mt-5">
             <div class="card-header">
                 <h5>{{ gb.Title }}</h5>
             </div>
-            <div class="card-body">                
-                <small class="text-muted">{{ gb.createdAt ? gb.createdAt|date('M d, Y H:i') : '' }}</small>     
-                <hr>                                
-                <p>
-                    {% autoescape %}
-                        {{ gb.Message|raw }}
-                    {% endautoescape %}
-                </p>                                               
+            <div class="card-body">
+                <div class="well">
+                    <a class="pull-left mr-3 p-2" href="#">
+                        <img class="media-object rounded-circle" src="{{ asset('images/avatar.png') }}" alt="user" width="64" class="rounded-circle">
+                    </a>
+                    <div class="media-body bg-light p-1 mb-2">
+                        <p class="text-right text-muted mr-2">By {{ gb.user.name }}</p>
+                        <p class="ml-2">{{ gb.Message|raw }}</p>
+                        <ul class="list-inline list-unstyled ml-2">
+                            <li class="list-inline-item">
+                                <span class="text-muted"><i class="fa fa-calendar"></i> {{ gb.updatedAt ? gb.updatedAt|date('M d, Y H:i') : '' }} </span>
+                            </li>
+                            <li class="list-inline-item">|</li>
+                            <li class="list-inline-item">
+                                <span><i class="fa fa-comment"></i> {{ gb.comments.count }} comments</span>
+                            <li class="list-inline-item">|</li>
+                            <li class="list-inline-item">
+                                <span><i class="fa fa-facebook-square"></i></span>
+                                <span><i class="fa fa-twitter-square"></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
-                Comments: {{ comments.count }}
-            </div>                   
-        </div>         
+                <a data-toggle="collapse" href="#comment" aria-expanded="false" aria-controls="comment">Leave a Comment</a>
+            </div>
+        </div>
+        {% include 'flashMessage/flashMessage.html.twig' %}
+        {% if not comment_form.vars.valid %}
+            <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+                {{ form_errors(comment_form) }}
+                {% for children in comment_form.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                    {% for child in children %}
+                        {% if not child.vars.valid %}
+                            {{ form_errors(child) }}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <div class="collapse mt-2{% if not comment_form.vars.valid %} show{% endif %}" id="comment">
+            <div class="card card-body">
+                {{ include('index/_comment.html.twig') }}
+            </div>
+        </div>
     </div>
     <div class="row d-flex justify-content-center mt-1 mb-100">
         <div class="container">
-            <div class="card mt-3">                    
-                {% if comments.count %}
+            <div class="card mt-3">
+                {% if gb.comments.count %}
                     <div class="comment-widgets">
                         {% for comment in comments %}
-                            <div class="d-flex flex-row comment-row p-3">
-                                <div class="p-2"><img src="{{ asset('public/images/avatar.png') }}" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="d-flex flex-row comment-row p-3 border-bottom">
+                                <div class="p-2"><img src="{{ asset('images/avatar.png') }}" alt="user" width="50" class="rounded-circle"></div>
                                 <div class="comment-text w-100">
-                                    <h6 class="font-medium">{{ comment.author }}</h6> 
+                                    <h6 class="font-medium">{{ comment.author }}</h6>
                                     <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
-                                    <div class="comment-footer"> 
-                                        {% if app.user and app.user.id == gb.user.id or is_granted('ROLE_ADMIN') %}                                            
-                                            <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a> 
+                                    <div class="comment-footer">
+                                        {% if app.user and app.user.id == gb.user.id or is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a>
                                         {% endif %}
-                                        <small class="text-muted float-right">{{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
+                                        <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         {% endfor %}
                     </div>
                 {% else %}
@@ -48,5 +87,5 @@
                 {% endif %}
             </div>
         </div>
-    </div>      
+    </div>
 {% endblock %}

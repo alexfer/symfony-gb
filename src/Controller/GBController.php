@@ -31,13 +31,7 @@ class GBController extends AbstractController
     {
         $gB = new GB();
 
-        $form = $this->createForm(GBType::class, $gB);
-//        $form->add('captcha', CaptchaType::class, [
-//            'label_attr' => [
-//                'class' => 'form-group mt-4 mb-4',
-//                'for' => "captcha",
-//        ]]);
-        
+        $form = $this->createForm(GBType::class, $gB);        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

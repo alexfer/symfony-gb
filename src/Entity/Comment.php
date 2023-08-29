@@ -18,9 +18,11 @@ class Comment
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Assert\NotBlank(message: 'author.blank')]
     private ?string $author = null;
-
-    #[ORM\Column(length: 180)]
+    
+    #[ORM\Column()]
+    #[Assert\Email(message: "The email '{{ value }}' is not a valid email.")]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -37,6 +39,9 @@ class Comment
 
     #[ORM\Column()]
     private ?int $gb_id = null;
+
+    #[ORM\Column(options: ['default' => 0])]
+    private ?int $approved = null;
 
     public function __construct()
     {
@@ -68,12 +73,7 @@ class Comment
         $this->created_at = $created_at;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAEmail($email): void
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -83,7 +83,12 @@ class Comment
         return $this->email;
     }
 
-    public function setAuthor(User $author): void
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor($author): void
     {
         $this->author = $author;
     }
@@ -103,9 +108,21 @@ class Comment
         return $this->gb_id;
     }
 
-    public function setUserId(int $gb_id): self
+    public function setGbId(int $gb_id): self
     {
         $this->gb_id = $gb_id;
+
+        return $this;
+    }
+
+    public function getApproved(): ?int
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(int $approved): static
+    {
+        $this->approved = $approved;
 
         return $this;
     }

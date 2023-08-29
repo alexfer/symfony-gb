@@ -3,48 +3,65 @@
 {% block title %}Guest Book Summary!{% endblock %}
 
 {% block body %}
-    <div class="container">          
-        <div class="row mt-5">
-            <div class="col-sm-6">                
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 my-5">
                 <div class="card border-secondary">
                     <div class="card-header">
-                        New Entries
+                        Last Entries
                     </div>
-                    <div class="card-body">                                                                        
-                        {% for entry in entries  %}   
-                            <small class="text-muted">[{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i') : '' }}]</small>
-                            <a class="text-secondary" href="{{ path('app_entry_show', {uuid: entry.uuid}) }}">
-                                {{ entry.title }}
-                            </a>
-                            <p class="card-text text-small"> 
-                            <hr>
-                            {{ entry.message }}
-                            </p>
-                            <small>Author: {{ entry.user.name }}</small>
-                            <hr>
-                        {% endfor %}                        
-                        <a href="#" class="text-info pull-right">Vew All</a>
+                    <div class="card-body p-2">
+                        {% for entry in entries  %}
+                            <div class="well">
+                                <a class="pull-left mr-3 p-2" href="#">
+                                    <img class="media-object rounded-circle" src="{{ asset('images/avatar.png') }}" alt="user" width="64" class="rounded-circle">
+                                </a>
+                                <div class="media-body bg-light p-1 mb-2">
+                                    <a href="{{ path('app_entry_show', {uuid: entry.uuid}) }}" title="{{ entry.title }}">
+                                        <h5 class="media-heading text-info">{{ entry.title|slice(0, 60) }}...</h5>
+                                    </a>
+                                    <p class="text-right text-muted mr-2">By {{ entry.user.name }}</p>
+                                    <p class="ml-2">{{ entry.message|slice(0, 200) }} ...</p>
+                                    <ul class="list-inline list-unstyled ml-2">
+                                        <li class="list-inline-item">
+                                            <span class="text-muted"><i class="fa fa-calendar"></i> {{ entry.updatedAt ? entry.updatedAt|date('M d, Y H:i') : '' }} </span>
+                                        </li>
+                                        <li class="list-inline-item">|</li>
+                                        <li class="list-inline-item">
+                                            <span><i class="fa fa-comment"></i> {{ entry.comments.count }} comments</span>
+                                        <li class="list-inline-item">|</li>
+                                        <li class="list-inline-item">
+                                            <span><i class="fa fa-facebook-square"></i></span>
+                                            <span><i class="fa fa-twitter-square"></i></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card border-secondary"> 
+            <div class="col-sm-6 my-5">
+                <div class="card border-secondary">
                     <div class="card-header">
                         Last Comments
                     </div>
                     <div class="comment-widgets">
                         {% for comment in comments %}
-                            <div class="d-flex flex-row comment-row p-3">
+                            <div class="d-flex flex-row comment-row p-3 border-bottom">
                                 <div class="p-2"><img src="{{ asset('images/avatar.png') }}" alt="user" width="50" class="rounded-circle"></div>
                                 <div class="comment-text w-100">
-                                    <h6 class="font-medium">{{ comment.author }}</h6> 
+                                    <h6 class="font-medium">{{ comment.author }}</h6>
                                     <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
-                                    <div class="comment-footer">                                         
-                                        <a href="{{ path('app_entry_show', {uuid: comment.gb.uuid}) }}" class="text-info">{{ comment.gb.title }}</a>                                         
-                                        <small class="text-muted float-right">{{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
+                                    <div class="comment-footer">
+                                        <a href="{{ path('app_entry_show', {uuid: comment.gb.uuid}) }}" title="{{ comment.gb.title }}" class="text-info">{{ comment.gb.title|slice(0, 60) }}...</a>
+                                        <div class="text-muted mt-3">
+                                            {{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
