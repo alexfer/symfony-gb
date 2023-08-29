@@ -73,8 +73,10 @@
                                     <h6 class="font-medium">{{ comment.author }}</h6>
                                     <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
                                     <div class="comment-footer">
-                                        {% if app.user and app.user.id == gb.user.id or is_granted('ROLE_ADMIN') %}
-                                            <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a>
+                                        {% if not comment.approved %}
+                                            {% if app.user and app.user.id == gb.user.id or is_granted('ROLE_ADMIN') %}
+                                                <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a>
+                                            {% endif %}
                                         {% endif %}
                                         <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
                                     </div>

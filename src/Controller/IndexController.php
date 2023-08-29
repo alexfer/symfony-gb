@@ -32,7 +32,13 @@ class IndexController extends AbstractController
     }
 
     #[Route('/show/{uuid}', name: 'app_entry_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, GB $gB, CommentRepository $commentRepository, EntityManagerInterface $entityManager): Response
+    public function show(
+            Request $request,
+            GB $gB,
+            CommentRepository $commentRepository,
+            UserInterface $user,
+            EntityManagerInterface $entityManager
+    ): Response
     {
         $comment = new Comment();
         $comment->setGb($gB);
@@ -57,17 +63,27 @@ class IndexController extends AbstractController
         return $this->render('index/show.html.twig', [
                     'comment_form' => $form->createView(),
                     'gb' => $gB,
-                    'comments' => $commentRepository->findApproved($gB->getId()),
+                    'comments' => $user->getId() ? $commentRepository->findBy([], ['created_at' => 'DESC'], 10) : $commentRepository->findApproved($gB->getId()),
         ]);
     }
 
     #[Route('/publish-comment/{id}', name: 'app_comment_publish', methods: ['GET'])]
-    public function publish(GB $gB, Comment $comment, UserInterface $user, TranslatorInterface $translator): Response
+    public function publish(
+            GB $gB,
+            Comment $comment,
+            UserInterface $user,
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator
+    ): Response
     {
         if ($comment->getGb()->getUserId() != $user->getId()) {
             $this->denyAccessUnlessGranted($user->getRoles(), $comment, $translator->trans('http_error_403.description'));
         }
+        
+        $comment->setApproved(1);
 
+        $entityManager->persist($comment);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_entry_show', [
                     'uuid' => $comment->getGb()->getUuid(),
