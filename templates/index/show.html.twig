@@ -68,7 +68,7 @@
                     <div class="comment-widgets">
                         {% for comment in comments %}
                             <div class="d-flex flex-row comment-row p-3 border-bottom">
-                                <div class="p-2"><img src="{{ asset('images/avatar.png') }}" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="p-2"><img src="{{ asset('images/avatar.png') }}" alt="user" width="50" class="rounded"></div>
                                 <div class="comment-text w-100">
                                     <h6 class="font-medium">{{ comment.author }}</h6>
                                     <span class="m-b-15 d-block">{{ comment.content|striptags }}</span>
