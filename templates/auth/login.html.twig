@@ -5,6 +5,7 @@
 {% block body %}
     <div class="container">
         {{ form_start(loginForm) }}
+        {% include 'flashMessage/flashMessage.html.twig' %}
         <form action="{{ path('app_login') }}" method="post">
             {% if error %}
                 <div class="alert alert-danger mt-5" role="alert">

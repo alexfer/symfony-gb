@@ -33,6 +33,12 @@ class SrcurityController extends AbstractController
         ]);
     }
 
+    #[Route('/login/failed', name: 'app_login_failed')]
+    public function error()
+    {
+        throw new \Exception('Please confirm your email');
+    }
+
     #[Route('/logout', name: 'app_logout')]
     public function logout(): Response
     {

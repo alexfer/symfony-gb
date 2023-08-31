@@ -9,6 +9,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EmailVerifier
 {
@@ -43,13 +44,17 @@ class EmailVerifier
     /**
      * @throws VerifyEmailExceptionInterface
      */
-    public function handleEmailConfirmation(Request $request, UserInterface $user): void
+    public function handleEmailConfirmation(Request $request, UserInterface $user = null): void
     {
-        $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+        if ($user != null) {
+            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
 
-        $user->setIsVerified(true);
+            $user->setIsVerified(1);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        } else {
+            
+        }
     }
 }

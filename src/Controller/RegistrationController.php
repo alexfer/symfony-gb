@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -27,7 +26,11 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(
+            Request $request,
+            UserPasswordHasherInterface $userPasswordHasher,
+            EntityManagerInterface $entityManager
+    ): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
 
@@ -57,13 +60,14 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                     (new TemplatedEmail())
-                            ->from(new Address($user->getEmail(), $user->getEmail()))
+                            ->from(new Address('no-reply@exampe.com', 'Welcome to GB'))
                             ->to($user->getEmail())
                             ->subject('Please Confirm your Email')
                             ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            return $this->redirectToRoute('app_index');
+            $this->addFlash('warning', 'Registration is not fully completed. Please login and then confirm your Email address');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -72,19 +76,14 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request): Response
     {
-        //
-        // IS_AUTHENTICATED_ANONYMOUSLY
-        // IS_AUTHENTICATED_FULLY
-        // 
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash('verify_email_error', $exception->getReason());
 
             return $this->redirectToRoute('app_register');
         }
@@ -92,6 +91,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute('app_register');
     }
 }

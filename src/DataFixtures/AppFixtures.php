@@ -34,12 +34,13 @@ class AppFixtures extends Fixture
 
     private function loadUsers(ObjectManager $manager): void
     {
-        foreach ($this->getUserData() as [$name, $password, $email, $roles]) {
+        foreach ($this->getUserData() as [$name, $password, $email, $roles, $isVerified]) {
             $user = new User();
             $user->setName($name);
             $user->setPassword($this->passwordHasher->hashPassword($user, $password));
             $user->setEmail($email);
             $user->setRoles($roles);
+            $user->isVerified($isVerified);
 
             $this->addReference($name, $user);
 
@@ -88,15 +89,15 @@ class AppFixtures extends Fixture
     }
 
     /**
-     * @return array<array{string, string, string, array<string>}>
+     * @return array<array{string, string, string, array<string, boolean>}>
      */
     private function getUserData(): array
     {
         return [
-            // $userData = [$name, $password, $email, $roles];
-            ['AlexanderSh', '7212104', 'alexandershtyher@gmai.com', [User::ROLE_ADMIN]],
-            ['Autoportal', '7212104', 'autoportal@email.ua', [User::ROLE_USER]],
-            ['TestUser', '7212104', 'test@example.com', [User::ROLE_USER]],
+            // $userData = [$name, $password, $email, $roles, $isVerified];
+            ['AlexanderSh', '7212104', 'alexandershtyher@gmai.com', [User::ROLE_ADMIN], 1],
+            ['Autoportal', '7212104', 'autoportal@email.ua', [User::ROLE_USER], 0],
+            ['TestUser', '7212104', 'test@example.com', [User::ROLE_USER], 0],
         ];
     }
 }
