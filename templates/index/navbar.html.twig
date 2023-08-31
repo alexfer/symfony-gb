@@ -10,7 +10,7 @@
                     <a class="nav-link" href="#">Link</a>
                 </li>
             </ul>
-            <ul class="navbar-nav nav ml-auto">                                           
+            <ul class="navbar-nav nav ml-auto">
                 {% if app.user %}
                     <li class="nav-item dropdown justify-content-between">
                         <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,8 +19,8 @@
                         <div class="dropdown-menu" aria-labelledby="userMenu">
                             <a class="dropdown-item" href="{{ path('app_profile') }}">{{ 'menu.user'|trans }}</a>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('app_admin_index') }}">{{ 'action.entries'|trans }}</a>                                    
-                                <a class="dropdown-item" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>                                    
+                                <a class="dropdown-item" href="{{ path('app_admin_index') }}">{{ 'action.entries'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>
                             {% else %}
                                 <a class="dropdown-item" href="{{ path('app_g_b_index') }}">{{ 'user.entries'|trans }}</a>
                                 <a class="dropdown-item" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
@@ -28,7 +28,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'menu.logout'|trans }}</a>
                         </div>
-                    </li>                
+                    </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_register') }}">{{ 'title.register'|trans }}</a>

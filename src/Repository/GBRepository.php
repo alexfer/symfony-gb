@@ -16,6 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class GBRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GB::class);
@@ -35,7 +36,6 @@ class GBRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-
 //    public function findOneBySomeField($value): ?GB
 //    {
 //        return $this->createQueryBuilder('g')

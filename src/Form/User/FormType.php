@@ -56,7 +56,7 @@ class FormType extends AbstractType
                     'label_attr' => [
                         'class' => 'form-check-label'
                     ],
-                    'required' => false,                    
+                    'required' => false,
                 ])
                 ->get('roles')
                 ->addModelTransformer(new CallbackTransformer(
@@ -66,7 +66,7 @@ class FormType extends AbstractType
                                 function ($rolesString) {
                                     return [$rolesString];
                                 }
-        ));        
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

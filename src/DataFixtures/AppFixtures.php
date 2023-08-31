@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
     {
         foreach ($this->getEntriesData() as [$title, $message, $user, $uuid, $approved]) {
             $gb = new GB();
-            $user =  $this->getReference('TestUser');
+            $user = $this->getReference('TestUser');
             $gb->setTitle($title);
             $gb->setMessage($message);
 

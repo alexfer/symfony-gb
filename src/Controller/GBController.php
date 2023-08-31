@@ -31,14 +31,14 @@ class GBController extends AbstractController
     {
         $gB = new GB();
 
-        $form = $this->createForm(GBType::class, $gB);        
+        $form = $this->createForm(GBType::class, $gB);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Entry has been created successfuly.');
-            
-            $uuid = Uuid::v4();            
-            $gB->setUuid($uuid);            
+
+            $uuid = Uuid::v4();
+            $gB->setUuid($uuid);
             $gB->setUser($user);
             $gB->setApproved(0);
 

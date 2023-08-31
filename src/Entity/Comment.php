@@ -20,7 +20,7 @@ class Comment
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank(message: 'author.blank')]
     private ?string $author = null;
-    
+
     #[ORM\Column()]
     #[Assert\Email(message: "The email '{{ value }}' is not a valid email.")]
     private ?string $email = null;

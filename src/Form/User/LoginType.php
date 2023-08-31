@@ -20,11 +20,10 @@ class LoginType extends AbstractType
     {
         $this->requestStack = $requestStack;
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-                ->add('username', TextType::class)
+        $builder->add('username', TextType::class)
                 ->add('password', PasswordType::class);
     }
 

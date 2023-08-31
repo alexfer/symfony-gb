@@ -1,9 +1,10 @@
 ## Symfony-gb - Test App
 
 ### Requirements:
-- [Symfony `6.3`](https://symfony.com/releases/6.3)
+- [Apache HTTP Server `2.4`](https://httpd.apache.org/docs/2.4/install.html)
 - [PHP `>=8.1`](https://www.php.net/releases/8.1/en.php)
 - [MySQL `8.0`](https://www.mysql.com/)
+- [Symfony `6.3`](https://symfony.com/releases/6.3)
 - [Node.js `18.17.1` (includes npm 9.6.7)](https://nodejs.org/en/download) or higher
 
 ### 1. Clone repository
@@ -20,7 +21,7 @@ Use [Composer](https://getcomposer.org/) install to download and install the pac
 ```bash
     composer install
 ```
-### 4. Creating a database and filling it with data
+### 4. Creating a database and fill it with data
 ```bash
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate

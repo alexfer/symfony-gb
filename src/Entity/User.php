@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,15 +31,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(nullable: true)]
+    #[Assert\Ip]
+    private ?string $ip = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-    
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTime $created_at;
-    
+
     final public const ROLE_USER = 'ROLE_USER';
     final public const ROLE_ADMIN = 'ROLE_ADMIN';
 
@@ -46,7 +51,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->created_at = new \DateTime();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-        
+
     /**
      * A visual identifier that represents this user.
      *
@@ -129,18 +134,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isVerified(): bool
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(?string $ip): static
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): static
+    public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
 
         return $this;
     }
-    
+
     public function getCreatedAt(): \DateTime
     {
         return $this->created_at;

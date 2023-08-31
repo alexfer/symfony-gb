@@ -30,18 +30,18 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
-        
+
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_index');
         }
-        
+
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_USER']);
-            $user->setIsVerified(true);
+            $user->setIp($request->getClientIp());
             // encode the plain password
             $user->setPassword(
                     $userPasswordHasher->hashPassword(
@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
                             $form->get('plainPassword')->getData()
                     )
             );
-            $user->setIsVerified(true);
+            $user->setIsVerified(false);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -57,13 +57,13 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                     (new TemplatedEmail())
-                            ->from(new Address('autoportal@email.ua', 'Alexander Sh'))
+                            ->from(new Address($user->getEmail(), $user->getEmail()))
                             ->to($user->getEmail())
                             ->subject('Please Confirm your Email')
                             ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            return $this->redirectToRoute('app_g_b_index');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -92,6 +92,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_index');
     }
 }

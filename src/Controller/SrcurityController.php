@@ -9,31 +9,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\User\LoginType;
 
-class AuthController extends AbstractController
+class SrcurityController extends AbstractController
 {
 
     #[Route('/login', name: 'app_login')]
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
-        
+
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_index');
         }
-        
-        $error = $authenticationUtils->getLastAuthenticationError();
 
-        $lastUsername = $authenticationUtils->getLastUsername();
+        $defaultData = ['username' => $authenticationUtils->getLastUsername()];
 
-        $defaultData = array('username' => $authenticationUtils->getLastUsername());
-        
         $form = $this->createForm(LoginType::class, $defaultData);
         $form->handleRequest($request);
 
         return $this->render('auth/login.html.twig', [
                     'loginForm' => $form->createView(),
-                    'last_username' => $lastUsername,
-                    'error' => $error,
+                    'last_username' => $authenticationUtils->getLastUsername(),
+                    'error' => $authenticationUtils->getLastAuthenticationError(),
         ]);
     }
 
