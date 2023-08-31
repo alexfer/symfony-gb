@@ -12,22 +12,24 @@
     git clone git@github.com:alexfer/symfony-gb.git
 ```
 ### 2. Prepare configuration
+You should
 ```bash
     cd symfony-gb/
     cp .env.original .env
 ```
+
 ### 3. Install dependencies use Composer
 Use [Composer](https://getcomposer.org/) install to download and install the package.
 ```bash
     composer install
 ```
+
 ### 4. Creating a database and fill it with data
 ```bash
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate
     php bin/console doctrine:fixtures:load
 ```
-
 ### 4. Install JavaScript dependencies & Compile scripts
 ```bash
     npm install
