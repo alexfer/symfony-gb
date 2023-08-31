@@ -3,11 +3,11 @@
 {% block title %}Show Entry{% endblock %}
 
 {% block body %}
-    <div class="container">   
-        {% include 'flashMessage/flashMessage.html.twig' %} 
+    <div class="container">
+        {% include 'flashMessage/flashMessage.html.twig' %}
         <div class="card border-secondary mt-5">
             <div class="card-header">
-                 <h5>{{ 'action.show_entry'|trans }}</h5>
+                <h5>{{ 'action.show_entry'|trans }}</h5>
             </div>
             <div class="card-body">
                 <b class="text-muted">Status:</b>
@@ -21,13 +21,13 @@
                     {% autoescape %}
                         {{ gb.Message|raw }}
                     {% endautoescape %}
-                </p>                               
-                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}     
+                </p>
+                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}
                 <p></p>
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
-                <hr>                
+                <hr>
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a> 
+                <a class="link-secondary" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a>
                 <hr>
                 <div class="section">
                     {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid, status: gb.approved}, with_context = false) }}
