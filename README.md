@@ -12,7 +12,7 @@
     git clone git@github.com:alexfer/symfony-gb.git
 ```
 ### 2. Prepare configuration
-You should
+You should change database configuration
 ```bash
     cd symfony-gb/
     cp .env.original .env
