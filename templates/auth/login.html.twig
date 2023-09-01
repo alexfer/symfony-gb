@@ -35,7 +35,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
                 <div class="card-footer">
-                    <button class="float-right btn {{ button_color|default('btn-primary') }}">{{ button_label|default('LogIn') }}</button>
+                    <button class="float-right btn {{ button_color|default('btn-primary') }}">{{ button_label|default('action.login'|trans) }}</button>
                 </div>
             </div>
         </form>

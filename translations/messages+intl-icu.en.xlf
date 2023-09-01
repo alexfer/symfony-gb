@@ -80,6 +80,10 @@
                 <source>title.register</source>
                 <target>Register</target>
             </trans-unit>
+            <trans-unit id="title.agree_terms">
+                <source>title.agree_terms</source>
+                <target>I agree to the terms and conditions</target>
+            </trans-unit>
             <trans-unit id="title.entry_list">
                 <source>title.entry_entry</source>
                 <target>Entry List</target>
@@ -157,6 +161,10 @@
                 <source>message.rejected_entry_successfully</source>
                 <target>This entry has been rejected successfully</target>
             </trans-unit>
+            <trans-unit id="massage.warning.register_incoplete">
+                <source>massage.warning.register_incoplete</source>
+                <target>Registration is not fully completed. Please login and then confirm your Email address.</target>
+            </trans-unit>            
             <trans-unit id="action.delete_entry">
                 <source>action.delete_entry</source>
                 <target>Delete entry</target>
@@ -220,6 +228,10 @@
             <trans-unit id="action.back_to_list">
                 <source>action.back_to_list</source>
                 <target>Back to the entry list</target>
+            </trans-unit>
+            <trans-unit id="action.comment_publish">
+                <source>action.comment_publish</source>
+                <target>Publish</target>
             </trans-unit>
             <trans-unit id="action.publish_comment">
                 <source>action.publish_comment</source>
@@ -301,6 +313,10 @@
             <trans-unit id="label.content">
                 <source>label.content</source>
                 <target>Content</target>
+            </trans-unit>
+            <trans-unit id="label.captcha">
+                <source>label.captcha</source>
+                <target>Captcha</target>
             </trans-unit>
             <trans-unit id="label.summary">
                 <source>label.summary</source>

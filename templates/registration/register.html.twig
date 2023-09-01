@@ -6,35 +6,35 @@
     <div class="container">
         {{ form_start(registrationForm) }}
         {% for flash_error in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {% endfor %}    
+            <div class="alert alert-danger" role="alert">{{ flash_error|trans }}</div>
+        {% endfor %}
         {% if form_errors(registrationForm) %}
             <div class="alert alert-danger pb-0" role="alert">{{ form_errors(registrationForm) }}</div>
         {% endif %}
-        <div class="card border-secondary mt-5">        
+        <div class="card border-secondary mt-5">
             <div class="card-header">
                 <h5>{{ 'title.register'|trans }}</h5>
             </div>
-            <div class="card-body">                                
+            <div class="card-body">
                 <div class="form-group">
-                    {{ form_row(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.name, {'label': 'label.fullname'|trans, 'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.email, {'label': 'label.email'|trans, 'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+                    {{ form_row(registrationForm.plainPassword, {'label': 'label.password'|trans}) }}
                 </div>
-                <div class="form-group">        
+                <div class="form-group">
                     {{ form_widget(registrationForm.agreeTerms) }}
-                    {{ form_label(registrationForm.agreeTerms) }}    
-                </div>                
-                <input type="hidden" name="_target_path" value="{{ path('app_g_b_index') }}"/>
-            </div>  
-            <div class="card-footer">
-                <button class="float-right btn {{ button_color|default('btn-primary') }}">{{ button_label|default('Register') }}</button>
+                    {{ form_label(registrationForm.agreeTerms, 'title.agree_terms'|trans) }}
+                </div>
+                <input type="hidden" name="_target_path" value="{{ path('app_login') }}"/>
             </div>
-        </div>        
-        {{ form_end(registrationForm) }}         
+            <div class="card-footer">
+                <button class="float-right btn {{ button_color|default('btn-primary') }}">{{ button_label|default('title.register'|trans) }}</button>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\{
     CheckboxType,
     PasswordType,
+    TextType,
+    EmailType,
 };
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,8 +23,17 @@ class RegistrationType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name')
-                ->add('email')
+        $builder->add('name', TextType::class, [                    
+                    'attr' => [
+                        'placeholder' => 'Jhohn Smith',
+                        'required' => 'required'
+                    ],
+                ])
+                ->add('email', EmailType::class, [
+                    'attr' => [
+                        'placeholder' => 'Your email address',
+                    ],
+                ])
                 ->add('agreeTerms', CheckboxType::class, [
                     'mapped' => false,
                     'constraints' => [

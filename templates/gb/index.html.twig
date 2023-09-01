@@ -6,7 +6,7 @@
     <div class="container">
         {% if not app.user.IsVerified %}
             <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
-                Registration is not fully completed. Please login and then confirm your Email address
+                {{ 'massage.warning.register_incoplete'|trans }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

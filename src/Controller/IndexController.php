@@ -67,7 +67,6 @@ class IndexController extends AbstractController
                     'gb' => $gB,
                     'totalComments' => $commentRepository->countComments($comment->getGb()->getId(), $token ? 0 : 1),
                     'comments' => $comments,
-                        //'comments' => $commentRepository->findBy([], ['created_at' => 'DESC'], 10),
         ]);
     }
 

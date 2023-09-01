@@ -14,6 +14,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -29,7 +30,8 @@ class RegistrationController extends AbstractController
     public function register(
             Request $request,
             UserPasswordHasherInterface $userPasswordHasher,
-            EntityManagerInterface $entityManager
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator
     ): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
@@ -66,7 +68,7 @@ class RegistrationController extends AbstractController
                             ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            $this->addFlash('warning', 'Registration is not fully completed. Please login and then confirm your Email address');
+            $this->addFlash('warning', $translator->trans('massage.warning.register_incoplete'));
             return $this->redirectToRoute('app_login');
         }
 

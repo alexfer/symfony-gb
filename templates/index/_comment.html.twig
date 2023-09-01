@@ -1,15 +1,15 @@
 {{ form_start(comment_form) }}
 <div class="form-group">
-    {{ form_row(comment_form.author, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(comment_form.author, {'label': 'label.author'|trans, 'attr': {'class': 'form-control'}}) }}
 </div>
 <div class="form-group">
-    {{ form_row(comment_form.email, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(comment_form.email, {'label': 'label.email'|trans, 'attr': {'class': 'form-control'}}) }}
 </div>
 <div class="form-group">
-    {{ form_row(comment_form.content, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(comment_form.content, {'label': 'label.content'|trans, 'attr': {'class': 'form-control'}}) }}
 </div>
 <div class="form-group">
-    {{ form_row(comment_form.captcha, {'attr': {'class': 'form-control '}}) }}
+    {{ form_row(comment_form.captcha, {'label': 'label.captcha'|trans, 'attr': {'class': 'form-control '}}) }}
 </div>
-<button type="submit" class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('Publish') }}</button>
+<button type="submit" class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('action.comment_publish'|trans) }}</button>
 {{ form_end(comment_form) }}
