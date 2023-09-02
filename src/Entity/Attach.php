@@ -10,9 +10,10 @@ use Doctrine\DBAL\Types\Types;
 #[ORM\Table(name: 'file')]
 class Attach
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: GB::class)]
@@ -22,8 +23,14 @@ class Attach
     #[ORM\Column()]
     private ?int $gb_id = null;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: Types::STRING)]
     private string $name;
+
+    #[ORM\Column(type: Types::STRING)]
+    private string $mime;
+
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $size = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private \DateTime $created_at;
@@ -31,6 +38,7 @@ class Attach
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->size = 0;
     }
 
     public function getId(): ?int
@@ -38,7 +46,7 @@ class Attach
         return $this->id;
     }
 
-    public function getNname(): string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -50,14 +58,40 @@ class Attach
         return $this;
     }
 
+    public function getMime(): ?string
+    {
+        return $this->mime;
+    }
+
+    public function setMime(string $mime): self
+    {
+        $this->mime = $mime;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
     public function getGb(): ?GB
     {
         return $this->gb;
     }
 
-    public function setGB(GB $gb): void
+    public function setGB(GB $gb): self
     {
         $this->gb = $gb;
+
+        return $this;
     }
 
     public function getGbId(): ?int

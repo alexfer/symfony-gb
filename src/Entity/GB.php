@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\{
 use App\Entity\{
     User,
     Comment,
+    Attach,
 };
 
 #[ORM\Entity(repositoryClass: GBRepository::class)]
@@ -48,6 +49,13 @@ class GB
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'gb', orphanRemoval: true, cascade: ['persist'])]
     #[ORM\OrderBy(['created_at' => 'DESC'])]
     private Collection $comments;
+    
+    /**
+     * @var Collection<int, File>
+     */
+    #[ORM\OneToMany(targetEntity: Attach::class, mappedBy: 'gb', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OrderBy(['created_at' => 'DESC'])]
+    private Collection $attachments;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private \DateTime $created_at;
@@ -60,6 +68,7 @@ class GB
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
         $this->comments = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
     }
 
     public function getUser(): ?User
@@ -164,5 +173,13 @@ class GB
     public function getComments(): Collection
     {
         return $this->comments;
+    }
+    
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
     }
 }

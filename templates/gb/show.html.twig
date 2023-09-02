@@ -3,7 +3,7 @@
 {% block title %}{{ 'action.show_entry'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">                
+    <div class="container">
         <div class="card border-secondary mt-5">
             <div class="card-header">
                 <h5>{{ 'action.show_entry'|trans }}</h5>
@@ -16,13 +16,13 @@
                     {% autoescape %}
                         {{ gb.Message|raw }}
                     {% endautoescape %}
-                </p>                               
-                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}     
+                </p>
+                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}
                 <p></p>
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
-                <hr>                
+                <hr>
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}">Reference to page</a> 
+                <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}">Reference to page</a>
             </div>
             <div class="card-footer">
                 <a class="btn btn-secondary float-right" href="{{ path('app_g_b_index') }}">{{ 'action.all_entry'|trans }}</a>

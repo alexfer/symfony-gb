@@ -29,6 +29,15 @@
                 <b class="text-muted">UUid:</b>
                 <a class="link-secondary" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a>
                 <hr>
+                <b class="text-muted">Files:</b>
+                <ul class="list-unstyled">
+                    {% for file in gb.attachments %}
+                        <li>
+                            <a href="" class="text-info">{{ file.name }}</a>
+                        </li>
+                        {% endfor %}
+                </ul>
+                <hr>
                 <div class="section">
                     {{ include('admin/gb/_action_form.html.twig', {uuid: gb.uuid, status: gb.approved}, with_context = false) }}
                 </div>

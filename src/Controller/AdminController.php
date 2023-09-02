@@ -10,7 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Entity\GB;
-use App\Form\GBType;
+use App\Form\{
+    GBType,
+    AttachType,
+};
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -35,7 +38,7 @@ class AdminController extends AbstractController
     #[Route('/{uuid}/edit', name: 'app_admin_entry_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(GBType::class, $gB);
+        $form = $this->createForm(AttachType::class, $gB);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

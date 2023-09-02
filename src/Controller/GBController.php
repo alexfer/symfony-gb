@@ -62,7 +62,7 @@ class GBController extends AbstractController
 
                 try {
                     $source->move(
-                            $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
+                            $info = $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
                             $newFilename
                     );
                 } catch (FileException $e) {
@@ -71,7 +71,10 @@ class GBController extends AbstractController
 
                 $attach = new Attach();
                 $attach->setGB($gB);
-                $attach->setName($newFilename);
+                $attach->setName($newFilename)
+                        ->setGB($gB)
+                        ->setSize(filesize($info))
+                        ->setMime(mime_content_type($info . '/' . $newFilename));
 
                 $entityManager->persist($attach);
                 $entityManager->flush();
@@ -108,14 +111,14 @@ class GBController extends AbstractController
 
             if ($source) {
                 $originalFilename = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
+                //dd($source->guessExtension());
 
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = sprintf("%s-%s.%s", $safeFilename, uniqid(), $source->guessExtension());
 
                 try {
                     $source->move(
-                            //$this->getParameter('attachments'),
-                            $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
+                            $info = $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
                             $newFilename
                     );
                 } catch (FileException $e) {
@@ -123,8 +126,10 @@ class GBController extends AbstractController
                 }
 
                 $attach = new Attach();
-                $attach->setGB($gB);
-                $attach->setName($newFilename);
+                $attach->setName($newFilename)
+                        ->setGB($gB)
+                        ->setSize(filesize($info))
+                        ->setMime(mime_content_type($info . '/' . $newFilename));
 
                 $entityManager->persist($attach);
                 $entityManager->flush();
