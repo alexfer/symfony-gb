@@ -2,8 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\GB;
-use App\Form\GBType;
+use App\Entity\{
+    GB,
+    Attach,
+};
+use App\Form\{
+    GBType,
+    AttachType,
+};
 use App\Repository\GBRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,8 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 #[Route('/gb')]
 class GBController extends AbstractController
@@ -27,11 +34,11 @@ class GBController extends AbstractController
     }
 
     #[Route('/new', name: 'app_g_b_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserInterface $user, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, UserInterface $user, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $gB = new GB();
 
-        $form = $this->createForm(GBType::class, $gB);
+        $form = $this->createForm(AttachType::class, $gB);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,6 +51,31 @@ class GBController extends AbstractController
 
             $entityManager->persist($gB);
             $entityManager->flush();
+
+            $source = $form->get('name')->getData();
+
+            if ($source) {
+                $originalFilename = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = sprintf("%s-%s.%s", $safeFilename, uniqid(), $source->guessExtension());
+
+                try {
+                    $source->move(
+                            $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
+                            $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw new \Exception($e->getMessage());
+                }
+
+                $attach = new Attach();
+                $attach->setGB($gB);
+                $attach->setName($newFilename);
+
+                $entityManager->persist($attach);
+                $entityManager->flush();
+            }
 
             return $this->redirectToRoute('app_g_b_edit', [
                         'uuid' => $uuid
@@ -65,12 +97,39 @@ class GBController extends AbstractController
     }
 
     #[Route('/{uuid}/edit', name: 'app_g_b_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(GBType::class, $gB);
+        $form = $this->createForm(AttachType::class, $gB);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $source = $form->get('name')->getData();
+
+            if ($source) {
+                $originalFilename = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = sprintf("%s-%s.%s", $safeFilename, uniqid(), $source->guessExtension());
+
+                try {
+                    $source->move(
+                            //$this->getParameter('attachments'),
+                            $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gB->getId(),
+                            $newFilename
+                    );
+                } catch (FileException $e) {
+                    throw new \Exception($e->getMessage());
+                }
+
+                $attach = new Attach();
+                $attach->setGB($gB);
+                $attach->setName($newFilename);
+
+                $entityManager->persist($attach);
+                $entityManager->flush();
+            }
+
             $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
 

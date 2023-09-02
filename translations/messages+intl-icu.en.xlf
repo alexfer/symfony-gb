@@ -338,6 +338,10 @@
                 <source>title.entry_new</source>
                 <target>Entry creation</target>
             </trans-unit>
+            <trans-unit id="title.attach_file">
+                <source>title.attach_file</source>
+                <target>Select File</target>
+            </trans-unit>
             <trans-unit id="action.edit_contents">
                 <source>action.edit_contents</source>
                 <target>Edit contents</target>

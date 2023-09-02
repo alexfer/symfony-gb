@@ -6,10 +6,9 @@
 <div class="form-group">
     {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
 </div>
-{% if app.request.attributes.get('_route') == 'app_g_b_new' %}
-    <div class="form-group">
-        {#{{ form_row(form.captcha, {'attr': {'class': 'form-control '}}) }}     #}
-    </div>
-{% endif %}
+<div class="custom-file">
+    {{ form_widget(form.name, {'attr': {'class': 'custom-file-input'}}) }}
+    {{ form_label(form.name, 'title.attach_file'|trans, {'label_attr': { 'class': 'custom-file-label'}}) }}
+</div>
 <button class="btn {{ button_color|default('btn-primary') }} mt-3">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
