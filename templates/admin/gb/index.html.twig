@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for gb in g_bs %}
+                            {% for gb in gbs %}
                                 <tr{{ gb.approved == 0 ? ' class="bg-warning text-muted"': '' }}>
                                     <td>{{ gb.id }}</td>
                                     <td>
@@ -46,7 +46,7 @@
                 {% endif %}
             </div>
             <div class="card-footer">
-                <a class="btn btn-secondary float-right" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
+                <a class="btn btn-secondary float-right" href="{{ path('app_gb_new') }}">{{ 'action.create_entry'|trans }}</a>
             </div>
         </div>
     </div>

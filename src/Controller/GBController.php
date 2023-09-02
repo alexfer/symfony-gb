@@ -25,15 +25,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class GBController extends AbstractController
 {
 
-    #[Route('/', name: 'app_g_b_index', methods: ['GET'])]
+    #[Route('/', name: 'app_gb_index', methods: ['GET'])]
     public function index(GBRepository $gBRepository, UserInterface $user): Response
     {
         return $this->render('gb/index.html.twig', [
-                    'g_bs' => $gBRepository->findBy(['user_id' => $user->getId()], ['id' => 'DESC']),
+                    'gbs' => $gBRepository->findBy(['user_id' => $user->getId()], ['id' => 'DESC']),
         ]);
     }
 
-    #[Route('/new', name: 'app_g_b_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_gb_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserInterface $user, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $gB = new GB();
@@ -80,18 +80,18 @@ class GBController extends AbstractController
                 $entityManager->flush();
             }
 
-            return $this->redirectToRoute('app_g_b_edit', [
+            return $this->redirectToRoute('app_gb_edit', [
                         'uuid' => $uuid
                             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('gb/new.html.twig', [
-                    'g_b' => $gB,
+                    'gb' => $gB,
                     'form' => $form,
         ]);
     }
 
-    #[Route('/{uuid}', name: 'app_g_b_show', methods: ['GET'])]
+    #[Route('/{uuid}', name: 'app_gb_show', methods: ['GET'])]
     public function show(GB $gB): Response
     {
         return $this->render('gb/show.html.twig', [
@@ -99,7 +99,7 @@ class GBController extends AbstractController
         ]);
     }
 
-    #[Route('/{uuid}/edit', name: 'app_g_b_edit', methods: ['GET', 'POST'])]
+    #[Route('/{uuid}/edit', name: 'app_gb_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, GB $gB, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(AttachType::class, $gB);
@@ -114,7 +114,7 @@ class GBController extends AbstractController
                 //dd($source->guessExtension());
 
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = sprintf("%s-%s.%s", $safeFilename, uniqid(), $source->guessExtension());
+                $newFilename = sprintf("%s-%s.%s", $originalFilename, uniqid(), $source->guessExtension());
 
                 try {
                     $source->move(
@@ -138,19 +138,19 @@ class GBController extends AbstractController
             $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_g_b_edit', [
+            return $this->redirectToRoute('app_gb_edit', [
                         'action' => 'edit',
                         'uuid' => $gB->getUuid()
                             ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('gb/edit.html.twig', [
-                    'g_b' => $gB,
+                    'gb' => $gB,
                     'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_g_b_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_gb_delete', methods: ['POST'])]
     public function delete(Request $request, GB $gB, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $gB->getId(), $request->request->get('_token'))) {
@@ -158,6 +158,6 @@ class GBController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_g_b_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_gb_index', [], Response::HTTP_SEE_OTHER);
     }
 }

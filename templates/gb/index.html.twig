@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for gb in g_bs %}
+                                {% for gb in gbs %}
                                     <tr>
                                         <td>{{ gb.id }}</td>
                                         <td>{{ gb.title }}</td>
@@ -38,8 +38,8 @@
                                         <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td>
                                         <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                         <td class="text-center">
-                                            <a class="link-secondary" href="{{ path('app_g_b_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="link-secondary" href="{{ path('app_gb_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a class="link-secondary" href="{{ path('app_gb_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 {% else %}
@@ -52,7 +52,7 @@
                     {% endif %}
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-secondary float-right" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
+                    <a class="btn btn-secondary float-right" href="{{ path('app_gb_new') }}">{{ 'action.create_entry'|trans }}</a>
                 </div>
             </div>
         {% endif %}

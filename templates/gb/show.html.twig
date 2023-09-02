@@ -22,10 +22,20 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}
                 <hr>
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_g_b_show', {'uuid': gb.uuid}) }}">Reference to page</a>
+                <a class="link-secondary" href="{{ path('app_gb_show', {'uuid': gb.uuid}) }}">Reference to page</a>
+                <hr>
+                <b class="text-muted">Files:</b>
+                <ul class="list-unstyled">
+                    {% for file in gb.attachments %}
+                        <li>
+                            <a href="" class="text-info">{{ file.name }}</a>
+                        </li>
+                        {% endfor %}
+                </ul>
+                <hr>
             </div>
             <div class="card-footer">
-                <a class="btn btn-secondary float-right" href="{{ path('app_g_b_index') }}">{{ 'action.all_entry'|trans }}</a>
+                <a class="btn btn-secondary float-right" href="{{ path('app_gb_index') }}">{{ 'action.all_entry'|trans }}</a>
             </div>
         </div>
     </div>

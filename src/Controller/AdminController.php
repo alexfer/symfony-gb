@@ -23,7 +23,7 @@ class AdminController extends AbstractController
     public function index(GBRepository $gBRepository): Response
     {
         return $this->render('admin/gb/index.html.twig', [
-                    'g_bs' => $gBRepository->findBy([], ['id' => 'DESC']),
+                    'gbs' => $gBRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
 
@@ -51,7 +51,7 @@ class AdminController extends AbstractController
         }
 
         return $this->renderForm('admin/gb/edit.html.twig', [
-                    'g_b' => $gB,
+                    'gb' => $gB,
                     'form' => $form,
         ]);
     }
