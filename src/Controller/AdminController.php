@@ -10,10 +10,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use App\Entity\{
-    GB,
-    Attach,
-};
+use App\Service\FileUploader;
+use App\Entity\GB;
 use App\Form\{    
     AttachType,
 };
@@ -22,6 +20,18 @@ use App\Form\{
 class AdminController extends AbstractController
 {
 
+    const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
+    
+    /**
+     * 
+     * @param int|null $objectId
+     * @return string
+     */
+    private function getTargetDir(?int $objectId): string
+    {
+        return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
+    }
+    
     #[Route('/', name: 'app_admin_index')]
     public function index(GBRepository $gbRepository): Response
     {
@@ -48,31 +58,18 @@ class AdminController extends AbstractController
             $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
             
-            $source = $form->get('name')->getData();
+            $file = $form->get('name')->getData();
 
-            if ($source) {
-                $originalFilename = pathinfo($source->getClientOriginalName(), PATHINFO_FILENAME);
-
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = sprintf("%s-%s.%s", $safeFilename, uniqid(), $source->guessExtension());
+            if ($file) {
+                $fileUploader = new FileUploader($this->getTargetDir($gb->getId()), $slugger);
 
                 try {
-                    $source->move(
-                            $info = $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $gb->getId(),
-                            $newFilename
-                    );
-                } catch (FileException $e) {
-                    throw new \Exception($e->getMessage());
+                    $attach = $fileUploader->upload($file)->handle();
+                } catch (\Exception $ex) {
+                    throw new \Exception($ex->getMessage());
                 }
 
-                $filePath = $info . '/' . $newFilename;
-
-                $attach = new Attach();
-                $attach->setGB($gb);
-                $attach->setName($newFilename)
-                        ->setGB($gb)
-                        ->setSize(filesize($filePath))
-                        ->setMime(mime_content_type($filePath));
+                $attach->setGb($gb);
 
                 $entityManager->persist($attach);
                 $entityManager->flush();
