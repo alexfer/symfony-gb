@@ -29,6 +29,19 @@
                                 <span><i class="fa fa-twitter-square"></i></span>
                             </li>
                         </ul>
+                        {% if gb.attachments.count %}
+                            <ul class="list-group list-group-flush ml-2">
+                                {% for file in gb.attachments %}
+                                    <li class="list-inline-item">
+                                        <i class="fa fa-file-o"></i> 
+                                        <a href="{{ path('app_download_file', {id: file.id, uuid: gb.uuid}) }}" class="text-info">{{ file.name }}</a>
+                                        <span class="text-muted">
+                                            <small>({{ file.size|format_bytes }})</small>
+                                        </span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>

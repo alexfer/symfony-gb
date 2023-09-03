@@ -12,15 +12,15 @@
                 </button>
             </div>
         {% else %}
-            <div class="card border-secondary mt-5">
+            <div class="card border-secondary mt-4">
                 <div class="card-header">
                     <h5>{{ 'action.entries'|trans }}</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body px-2 py-1">
                     {% if app.user %}
-                        <table class="table table-hover">
+                        <table class="table table-hover border-light">
                             <thead>
-                                <tr>
+                                <tr class="table-light">
                                     <th>Id</th>
                                     <th>Title</th>
                                     <th>User Name</th>
@@ -31,20 +31,20 @@
                             </thead>
                             <tbody>
                                 {% for gb in gbs %}
-                                    <tr>
+                                    <tr class="{% if not gb.approved %} text-danger bg-light{% endif %}">
                                         <td>{{ gb.id }}</td>
                                         <td>{{ gb.title }}</td>
                                         <td>{{ gb.user.name }}</td>
                                         <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td>
                                         <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                         <td class="text-center">
-                                            <a class="link-secondary" href="{{ path('app_gb_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a class="link-secondary" href="{{ path('app_gb_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="link-info" href="{{ path('app_gb_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a class="link-info" href="{{ path('app_gb_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 {% else %}
                                     <tr>
-                                        <td colspan="6" class="text-center">{{ 'entry.no_entries_found'|trans }}</td>
+                                        <td colspan="6" class="text-center text-secondary">{{ 'entry.no_entries_found'|trans }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

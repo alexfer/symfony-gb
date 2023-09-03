@@ -137,6 +137,10 @@
                 <source>action.edit</source>
                 <target>Edit</target>
             </trans-unit>
+            <trans-unit id="action.update">
+                <source>action.update</source>
+                <target>Update</target>
+            </trans-unit>
             <trans-unit id="action.edit_entry">
                 <source>action.edit_entry</source>
                 <target>Edit entry</target>
@@ -262,6 +266,10 @@
                 <target>Close</target>
             </trans-unit>
 
+            <trans-unit id="label.files">
+                <source>label.files</source>
+                <target>Files</target>
+            </trans-unit>
             <trans-unit id="label.title">
                 <source>label.title</source>
                 <target>Title</target>

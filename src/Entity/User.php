@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Ip]
     private ?string $ip = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(type: 'boolean')]

@@ -21,7 +21,7 @@
                                         <h5 class="media-heading text-info">{{ entry.title|slice(0, 60) }}...</h5>
                                     </a>
                                     <p class="text-right text-muted mr-2">By {{ entry.user.name }}</p>
-                                    <p class="ml-2">{{ entry.message|slice(0, 200) }} ...</p>
+                                    <p class="ml-2">{{ entry.message|striptags|slice(0, 200) }} ...</p>
                                     <ul class="list-inline list-unstyled ml-2">
                                         <li class="list-inline-item">
                                             <span class="text-muted"><i class="fa fa-calendar"></i> {{ entry.updatedAt ? entry.updatedAt|date('M d, Y H:i') : '' }} </span>

@@ -3,14 +3,14 @@
 {% block title %}{{ 'action.edit_entry'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">        
-        {% include 'flashMessage/flashMessage.html.twig' %}        
+    <div class="container">
+        {% include 'flashMessage/flashMessage.html.twig' %}
         <div class="card border-secondary mt-5">
             <div class="card-header">
                 <h5>{{ 'action.edit_entry'|trans }}</h5>
             </div>
             <div class="card-body">
-                {% include 'gb/_form.html.twig' with {'button_label': 'Update', 'button_color': 'btn-primary'}  %}
+                {% include 'gb/_form.html.twig' with {'button_label': 'action.update'|trans, 'button_color': 'btn-primary'}  %}
             </div>
             <div class="card-footer">
                 <a class="btn btn-secondary float-right" href="{{ path('app_gb_index') }}">{{ 'action.all_entry'|trans }}</a>

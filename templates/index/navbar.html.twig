@@ -22,8 +22,8 @@
                                 <a class="dropdown-item" href="{{ path('app_admin_index') }}">{{ 'action.entries'|trans }}</a>
                                 <a class="dropdown-item" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>
                             {% else %}
-                                <a class="dropdown-item" href="{{ path('app_g_b_index') }}">{{ 'user.entries'|trans }}</a>
-                                <a class="dropdown-item" href="{{ path('app_g_b_new') }}">{{ 'action.create_entry'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_gb_index') }}">{{ 'user.entries'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_gb_new') }}">{{ 'action.create_entry'|trans }}</a>
                             {% endif %}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'menu.logout'|trans }}</a>

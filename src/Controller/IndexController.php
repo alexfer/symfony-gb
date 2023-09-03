@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\{
+    Request,
+    Response,
+    BinaryFileResponse,
+};
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -13,6 +16,7 @@ use App\Form\CommentType;
 use App\Entity\{
     GB,
     Comment,
+    Attach,
 };
 use App\Repository\{
     GBRepository,
@@ -23,10 +27,10 @@ class IndexController extends AbstractController
 {
 
     #[Route('/', name: 'app_index')]
-    public function index(GBRepository $gBRepository, CommentRepository $commentRepository): Response
+    public function index(GBRepository $gbRepository, CommentRepository $commentRepository): Response
     {
         return $this->render('index/index.html.twig', [
-                    'entries' => $gBRepository->findBy(['approved' => true], ['id' => 'DESC'], 5),
+                    'entries' => $gbRepository->findBy(['approved' => true], ['id' => 'DESC'], 5),
                     'comments' => $commentRepository->findBy(['approved' => true], ['id' => 'DESC'], 5),
         ]);
     }
@@ -34,13 +38,13 @@ class IndexController extends AbstractController
     #[Route('/show/{uuid}', name: 'app_entry_show', methods: ['GET', 'POST'])]
     public function show(
             Request $request,
-            GB $gB,
+            GB $gb,
             CommentRepository $commentRepository,
             EntityManagerInterface $entityManager
     ): Response
     {
         $comment = new Comment();
-        $comment->setGb($gB);
+        $comment->setGb($gb);
 
         $token = $this->container->get('security.token_storage')->getToken();
         $condition = $token !== null ? [] : ['approved' => true];
@@ -64,7 +68,7 @@ class IndexController extends AbstractController
 
         return $this->render('index/show.html.twig', [
                     'comment_form' => $form->createView(),
-                    'gb' => $gB,
+                    'gb' => $gb,
                     'totalComments' => $commentRepository->countComments($comment->getGb()->getId(), $token ? 0 : 1),
                     'comments' => $comments,
         ]);
@@ -90,6 +94,17 @@ class IndexController extends AbstractController
         return $this->redirectToRoute('app_entry_show', [
                     'uuid' => $comment->getGb()->getUuid(),
                         ], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{uuid}/download-file/{id}', name: 'app_download_file', methods: ['GET'])]
+    public function download(Request $request, Attach $attach): Response
+    {
+        $filePath = $this->getParameter('kernel.project_dir') . '/public/attachments/entry/' . $attach->getGbId() . '/' . $attach->getName();
+        if (file_exists($filePath)) {
+            $response = new BinaryFileResponse($filePath);
+            return $response;
+        }
+        return $this->redirectToRoute('app_entry_show', ['uuid' => $attach->getGb()->getUuid()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/delete-comment/{id}', name: 'app_comment_delete', methods: ['GET'])]
