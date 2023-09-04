@@ -1,6 +1,16 @@
 fos_ck_editor:
     configs:
-        main_config: 
-            toolbar: basic
+        main_config:
+            toolbar: [
+                [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript" ], ["-"],
+                [ "Cut", "Copy", "Paste", "PasteText", "PasteFromWord"], ["-"],
+                [ "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"  ], ["-"],
+                [ "Undo", "Redo" ], ["-"],
+                [ "CopyFormatting", "RemoveFormat" ], ["-"],
+                [ "Image", "Table", "HorizontalRule", "Smiley", "SpecialChar", "PageBreak" ], ["-"],
+                [ "Source", "-", "Save", "Anchor", "Maximize" ], ["-"],
+                ["About"],
+              ]
+
     base_path: "bundles/fosckeditor"
     js_path:   "bundles/fosckeditor/ckeditor.js"

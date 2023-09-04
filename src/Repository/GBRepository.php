@@ -22,7 +22,7 @@ class GBRepository extends ServiceEntityRepository
         parent::__construct($registry, GB::class);
     }
 
-    public function getAllEntries()
+    public function findAllEntries()
     {
         return $this->createQueryBuilder('gb')
                         ->orderBy('gb.id', 'DESC')
