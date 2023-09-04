@@ -22,6 +22,15 @@ class GBRepository extends ServiceEntityRepository
         parent::__construct($registry, GB::class);
     }
 
+    public function getAllEntries()
+    {
+        return $this->createQueryBuilder('gb')
+                        ->orderBy('gb.id', 'DESC')
+                        ->setMaxResults(10)
+                        ->getQuery()
+                        ->getResult();
+    }
+
 //    /**
 //     * @return GB[] Returns an array of GB objects
 //     */

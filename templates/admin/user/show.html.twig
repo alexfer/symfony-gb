@@ -3,8 +3,8 @@
 {% block title %}{{ 'title.show_user'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">        
-        {% include 'flashMessage/flashMessage.html.twig' %}        
+    <div class="container">
+        {% include 'flashMessage/flashMessage.html.twig' %}
         <div class="card border-secondary mt-5">
             <div class="card-header">
                 {{ 'title.show_user'|trans }}
@@ -14,8 +14,10 @@
                 <p>{{ user.name }}</p>
                 <b class="text-muted">Email:</b>
                 <p>{{ user.email }}</p>
+                <b class="text-muted">IP:</b>
+                <p>{{ user.ip }}</p>
                 <b class="text-muted">Roles:</b>
-                <p>{{ user.roles|join(', ') }}</p>                
+                <p>{{ user.roles|join(', ') }}</p>
                 <hr>
                 <div class="section">
                     {{ include('admin/user/_action_form.html.twig', {id: user.id}, with_context = false) }}

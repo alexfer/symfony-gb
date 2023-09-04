@@ -73,8 +73,7 @@ class FileUploader
 
     /**
      * 
-     * @param Entity $entity
-     * @return void
+     * @return Attach|null
      */
     public function handle(): ?Attach
     {

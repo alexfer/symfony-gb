@@ -15,7 +15,8 @@
                     </a>
                     <div class="media-body bg-light p-1 mb-2">
                         <p class="text-right text-muted mr-2">By {{ gb.user.name }}</p>
-                        <p class="ml-2">{{ gb.Message|raw }}</p>
+                        <p class="ml-2">
+                            {{ gb.Message|nl2br|raw }}</p>
                         <ul class="list-inline list-unstyled ml-2">
                             <li class="list-inline-item">
                                 <span class="text-muted"><i class="fa fa-calendar"></i> {{ gb.updatedAt ? gb.updatedAt|date('M d, Y H:i') : '' }} </span>
@@ -33,7 +34,7 @@
                             <ul class="list-group list-group-flush ml-2">
                                 {% for file in gb.attachments %}
                                     <li class="list-inline-item">
-                                        <i class="fa fa-file-o"></i> 
+                                        <i class="fa fa-file-o"></i>
                                         <a href="{{ path('app_download_file', {id: file.id, uuid: gb.uuid}) }}" class="text-info">{{ file.name }}</a>
                                         <span class="text-muted">
                                             <small>({{ file.size|format_bytes }})</small>
