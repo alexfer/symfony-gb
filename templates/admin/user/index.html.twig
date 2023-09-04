@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for user in users %}
+                            {% for user in paginator.items %}
                                 <tr class="{% if not user.isVerified  %} text-danger  bg-light{% endif %}">
                                     <td>{{ user.id }}</td>
                                     <td>{{ user.name }}</td>
@@ -41,6 +41,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% include 'utils/paginator.html.twig' %}
                 {% endif %}
             </div>
             <div class="card-footer">

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Utils\Paginator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Repository\UserRepository;
 use App\Form\User\FormType;
@@ -18,10 +19,12 @@ class UserController extends AbstractController
 {
 
     #[Route('/', name: 'app_admin_users')]
-    public function index(UserRepository $userRepository): Response
+    public function index(Request $request, Paginator $paginator, UserRepository $userRepository): Response
     {
+        $query = $userRepository->findAllUsers();
+
         return $this->render('admin/user/index.html.twig', [
-                    'users' => $userRepository->findBy([], ['id' => 'DESC']),
+                    'paginator' => $paginator->paginate($query, $request->query->getInt('page', 1)),
         ]);
     }
 

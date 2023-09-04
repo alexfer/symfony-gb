@@ -16,6 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AttachRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Attach::class);
@@ -35,7 +36,6 @@ class AttachRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-
 //    public function findOneBySomeField($value): ?Attach
 //    {
 //        return $this->createQueryBuilder('a')

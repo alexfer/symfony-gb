@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Utils\Paginator;
 use App\Service\FileUploader;
 
 #[Route('/gb')]
@@ -28,10 +29,12 @@ class GBController extends AbstractController
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
 
     #[Route('/', name: 'app_gb_index', methods: ['GET'])]
-    public function index(GBRepository $gbRepository, UserInterface $user): Response
+    public function index(Request $request, Paginator $paginator, GBRepository $gbRepository, UserInterface $user): Response
     {
+        $query = $gbRepository->findAllEntriesByUserId($user->getId());
+
         return $this->render('gb/index.html.twig', [
-                    'gbs' => $gbRepository->findBy(['user_id' => $user->getId()], ['id' => 'DESC']),
+                    'paginator' => $paginator->paginate($query, $request->query->getInt('page', 1)),
         ]);
     }
 
@@ -114,7 +117,7 @@ class GBController extends AbstractController
             $file = $form->get('name')->getData();
 
             if ($file) {
-                $fileUploader = new FileUploader($this->getTargetDir($gb->getId()), $slugger);                
+                $fileUploader = new FileUploader($this->getTargetDir($gb->getId()), $slugger);
 
                 try {
                     $attach = $fileUploader->upload($file)->handle();

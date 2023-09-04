@@ -24,11 +24,15 @@ class GBRepository extends ServiceEntityRepository
 
     public function findAllEntries()
     {
+        return $this->createQueryBuilder('gb')->orderBy('gb.id', 'DESC');
+    }
+
+    public function findAllEntriesByUserId($id)
+    {
         return $this->createQueryBuilder('gb')
-                        ->orderBy('gb.id', 'DESC')
-                        ->setMaxResults(10)
-                        ->getQuery()
-                        ->getResult();
+                        ->where('gb.user_id = :id')
+                        ->setParameter('id', $id)
+                        ->orderBy('gb.id', 'DESC');
     }
 
 //    /**

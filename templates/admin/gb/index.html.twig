@@ -22,18 +22,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for gb in gbs %}
-                                <tr class="{% if not gb.approved %} text-danger  bg-light{% endif %}">
-                                    <td>{{ gb.id }}</td>
+                            {% for entry in paginator.items %}
+                                <tr class="{% if not entry.approved %} text-danger  bg-light{% endif %}">
+                                    <td>{{ entry.id }}</td>
                                     <td>
-                                        <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': gb.user.id}) }}">{{ gb.user.name }}</a>
+                                        <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': entry.user.id}) }}">{{ entry.user.name }}</a>
                                     </td>
-                                    <td>{{ gb.title }}</td>
-                                    <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td>
-                                    <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
+                                    <td>{{ entry.title }}</td>
+                                    <td>{{ entry.createdAt ? entry.createdAt|date('Y-m-d H:i') : '' }}</td>
+                                    <td>{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                     <td class="text-center">
-                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_edit', {'uuid': entry.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_show', {'uuid': entry.uuid}) }}"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -43,6 +43,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% include 'utils/paginator.html.twig' %}
                 {% endif %}
             </div>
             <div class="card-footer">

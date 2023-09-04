@@ -30,16 +30,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for gb in gbs %}
-                                    <tr class="{% if not gb.approved %} text-danger bg-light{% endif %}">
-                                        <td>{{ gb.id }}</td>
-                                        <td>{{ gb.title }}</td>
-                                        <td>{{ gb.user.name }}</td>
-                                        <td>{{ gb.createdAt ? gb.createdAt|date('Y-m-d H:i') : '' }}</td>
-                                        <td>{{ gb.updatedAt ? gb.updatedAt|date('Y-m-d H:i') : '' }}</td>
+                                {% for entry in paginator.items %}
+                                    <tr class="{% if not entry.approved %} text-danger bg-light{% endif %}">
+                                        <td>{{ entry.id }}</td>
+                                        <td>{{ entry.title }}</td>
+                                        <td>{{ entry.user.name }}</td>
+                                        <td>{{ entry.createdAt ? entry.createdAt|date('Y-m-d H:i') : '' }}</td>
+                                        <td>{{ entry.updatedAt ? entry.updatedAt|date('Y-m-d H:i') : '' }}</td>
                                         <td class="text-center">
-                                            <a class="link-info" href="{{ path('app_gb_edit', {'uuid': gb.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
-                                            <a class="link-info" href="{{ path('app_gb_show', {'uuid': gb.uuid}) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="link-info" href="{{ path('app_gb_edit', {'uuid': entry.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <a class="link-info" href="{{ path('app_gb_show', {'uuid': entry.uuid}) }}"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 {% else %}
@@ -49,6 +49,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                        {% include 'utils/paginator.html.twig' %}
                     {% endif %}
                 </div>
                 <div class="card-footer">

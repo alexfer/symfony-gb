@@ -10,9 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Utils\Paginator;
 use App\Service\FileUploader;
 use App\Entity\GB;
-use App\Form\{    
+use App\Form\{
     AttachType,
 };
 
@@ -21,7 +22,7 @@ class AdminController extends AbstractController
 {
 
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
-    
+
     /**
      * 
      * @param int|null $objectId
@@ -31,12 +32,14 @@ class AdminController extends AbstractController
     {
         return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
     }
-    
+
     #[Route('/', name: 'app_admin_index')]
-    public function index(GBRepository $gbRepository): Response
+    public function index(Request $request, Paginator $paginator, GBRepository $gbRepository): Response
     {
+        $query = $gbRepository->findAllEntries();
+
         return $this->render('admin/gb/index.html.twig', [
-                    'gbs' => $gbRepository->findBy([], ['id' => 'DESC']),
+                    'paginator' => $paginator->paginate($query, $request->query->getInt('page', 1)),
         ]);
     }
 
@@ -57,7 +60,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Entry has been updated successfuly.');
             $entityManager->flush();
-            
+
             $file = $form->get('name')->getData();
 
             if ($file) {

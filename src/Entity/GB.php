@@ -49,7 +49,7 @@ class GB
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'gb', orphanRemoval: true, cascade: ['persist'])]
     #[ORM\OrderBy(['created_at' => 'DESC'])]
     private Collection $comments;
-    
+
     /**
      * @var Collection<int, File>
      */
@@ -174,7 +174,7 @@ class GB
     {
         return $this->comments;
     }
-    
+
     /**
      * @return Collection<int, Comment>
      */

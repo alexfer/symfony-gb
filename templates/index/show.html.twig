@@ -15,8 +15,8 @@
                     </a>
                     <div class="media-body bg-light p-1 mb-2">
                         <p class="text-right text-muted mr-2">By {{ gb.user.name }}</p>
-                        <p class="ml-2">
-                            {{ gb.Message|nl2br|raw }}</p>
+                        <p class="ml-2">{{ gb.Message|raw }}</p>
+                        <p class="d-block mt-4 mb-1"></p>
                         <ul class="list-inline list-unstyled ml-2">
                             <li class="list-inline-item">
                                 <span class="text-muted"><i class="fa fa-calendar"></i> {{ gb.updatedAt ? gb.updatedAt|date('M d, Y H:i') : '' }} </span>
