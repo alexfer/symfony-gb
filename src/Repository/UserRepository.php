@@ -22,18 +22,43 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
 
+    /**
+     * 
+     * @var array
+     */
+    private array $columns = ['id', 'name', 'email', 'created_at'];
+    
+    /**
+     * 
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
-    public function findAllUsers()
+    /**
+     * 
+     * @param string $orderBy
+     * @param string $name
+     * @return object|null
+     */
+    public function findAllUsers(string $orderBy, string $name): ?object
     {
-        return $this->createQueryBuilder('u')->orderBy('u.id', 'DESC');
+        if (!in_array($name, $this->columns)) {
+            $name = 'id';
+        }
+        return $this->createQueryBuilder('u')
+                ->orderBy(sprintf('u.%s', $name), $orderBy);
     }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     * 
+     * @param PasswordAuthenticatedUserInterface $user
+     * @param string $newHashedPassword
+     * @return void
+     * @throws UnsupportedUserException
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -46,6 +71,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * 
+     * @param string $usernameOrEmail
+     * @return User|null
+     */
     public function loadUserByIdentifier(string $usernameOrEmail): ?User
     {
         $entityManager = $this->getEntityManager();

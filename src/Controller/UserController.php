@@ -19,11 +19,18 @@ class UserController extends AbstractController
 {
 
     #[Route('/', name: 'app_admin_users')]
+    #[Route('/order/by/{name}/{order}', name: 'app_admin_sort_users')]
     public function index(Request $request, Paginator $paginator, UserRepository $userRepository): Response
     {
-        $query = $userRepository->findAllUsers();
+        $name = $request->get('name');
+        $order = $request->get('order');
+
+        $orderBy = ($order == 'asc' ? 'asc' : 'desc');
+
+        $query = $userRepository->findAllUsers($orderBy, $name);
 
         return $this->render('admin/user/index.html.twig', [
+                    'orderBy' => ($request->get('order') == 'asc' ? 'desc' : 'asc'),
                     'paginator' => $paginator->paginate($query, $request->query->getInt('page', 1)),
         ]);
     }

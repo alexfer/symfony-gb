@@ -13,11 +13,31 @@
                     <table class="table table-hover border-light">
                         <thead>
                             <tr class="table-light">
-                                <th>Id</th>
-                                <th>User Name</th>
+                                <th>
+                                    <a href="{{ path('app_admin_sort_users', {'order': orderBy, 'name': 'id'}) }}" class="text-dark text-decoration-none">
+                                        Id
+                                        <i class="fa fa-unsorted text-secondary"></i>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ path('app_admin_sort_users', {'order': orderBy, 'name': 'name'}) }}" class="text-dark text-decoration-none">
+                                        User Name
+                                        <i class="fa fa-unsorted text-secondary"></i>
+                                    </a>
+                                </th>
                                 <th>Roles</th>
-                                <th>Email</th>
-                                <th>Created At</th>
+                                <th>
+                                    <a href="{{ path('app_admin_sort_users', {'order': orderBy, 'name': 'email'}) }}" class="text-dark text-decoration-none">
+                                        Email
+                                        <i class="fa fa-unsorted text-secondary"></i>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ path('app_admin_sort_users', {'order': orderBy, 'name': 'created_at'}) }}" class="text-dark text-decoration-none">
+                                        Created At
+                                        <i class="fa fa-unsorted text-secondary"></i>
+                                    </a>
+                                </th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
