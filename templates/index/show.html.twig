@@ -19,7 +19,7 @@
                         <p class="d-block mt-4 mb-1"></p>
                         <ul class="list-inline list-unstyled ml-2">
                             <li class="list-inline-item">
-                                <span class="text-muted"><i class="fa fa-calendar"></i> {{ gb.updatedAt ? gb.updatedAt|date('M d, Y H:i') : '' }} </span>
+                                <span class="text-muted"><i class="fa fa-calendar"></i> {{ gb.updatedAt ? gb.updatedAt|date(date_format) : '' }} </span>
                             </li>
                             <li class="list-inline-item">|</li>
                             <li class="list-inline-item">
@@ -92,7 +92,7 @@
                                                 <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a> <a href="{{ path('app_comment_delete', {id: comment.id}) }}" role="button" class="btn btn-outline-danger btn-sm">{{ 'action.delete_comment'|trans }}</a>
                                             {% endif %}
                                         {% endif %}
-                                        <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date('M d, Y H:i') : '' }}</small>
+                                        <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date(date_format) : '' }}</small>
                                     </div>
                                 </div>
                             </div>

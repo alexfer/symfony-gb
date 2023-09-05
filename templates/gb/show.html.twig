@@ -17,9 +17,9 @@
                         {{ gb.Message|raw }}
                     {% endautoescape %}
                 </p>
-                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date('M d, Y H:i') : '' }}
+                <b class="text-muted">Date Created: </b>{{ gb.createdAt ? gb.createdAt|date(date_format) : '' }}
                 <p></p>
-                <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date('M d, Y H:i') : '' }}
+                <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date(date_format) : '' }}
                 <hr>
                 <b class="text-muted">UUid:</b>
                 <a class="link-secondary" href="{{ path('app_entry_show', {'uuid': gb.uuid}) }}">Reference to page</a>

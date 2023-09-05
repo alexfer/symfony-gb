@@ -27,7 +27,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @var array
      */
     private array $columns = ['id', 'name', 'email', 'created_at'];
-    
+
     /**
      * 
      * @param ManagerRegistry $registry
@@ -49,7 +49,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $name = 'id';
         }
         return $this->createQueryBuilder('u')
-                ->orderBy(sprintf('u.%s', $name), $orderBy);
+                        ->orderBy(sprintf('u.%s', $name), $orderBy);
     }
 
     /**

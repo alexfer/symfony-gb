@@ -21,13 +21,39 @@
                         <table class="table table-hover border-light">
                             <thead>
                                 <tr class="table-light">
-                                    <th>Id</th>
-                                    <th>User Name</th>
-                                    <th>Title</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>
+                                        <a href="{{ path('app_gb_sort_entries', {'order': orderBy, 'name': 'id'}) }}" class="text-dark text-decoration-none">
+                                            Id
+                                            <i class="fa fa-unsorted text-secondary"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ path('app_gb_sort_entries', {'order': orderBy, 'name': 'name'}) }}" class="text-dark text-decoration-none">
+                                            User Name
+                                            <i class="fa fa-unsorted text-secondary"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ path('app_gb_sort_entries', {'order': orderBy, 'name': 'title'}) }}" class="text-dark text-decoration-none">
+                                            Title
+                                            <i class="fa fa-unsorted text-secondary"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ path('app_gb_sort_entries', {'order': orderBy, 'name': 'created_at'}) }}" class="text-dark text-decoration-none">
+                                            Created At
+                                            <i class="fa fa-unsorted text-secondary"></i>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{ path('app_gb_sort_entries', {'order': orderBy, 'name': 'updated_at'}) }}" class="text-dark text-decoration-none">
+                                            Updated At
+                                            <i class="fa fa-unsorted text-secondary"></i>
+                                        </a>
+                                    </th>
                                     <th class="text-center">Actions</th>
                                 </tr>
+                            </thead>
                             </thead>
                             <tbody>
                                 {% for entry in paginator.items %}
@@ -35,8 +61,8 @@
                                         <td>{{ entry.id }}</td>
                                         <td>{{ entry.user.name }}</td>
                                         <td>{{ entry.title }}</td>
-                                        <td>{{ entry.createdAt ? entry.createdAt|date('M d, Y H:i') : '' }}</td>
-                                        <td>{{ entry.updatedAt ? entry.updatedAt|date('M d, Y H:i') : '' }}</td>
+                                        <td>{{ entry.createdAt ? entry.createdAt|date(date_format) : '' }}</td>
+                                        <td>{{ entry.updatedAt ? entry.updatedAt|date(date_format) : '' }}</td>
                                         <td class="text-center">
                                             <a class="link-info" href="{{ path('app_gb_edit', {'uuid': entry.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
                                             <a class="link-info" href="{{ path('app_gb_show', {'uuid': entry.uuid}) }}"><i class="fa fa-eye"></i></a>

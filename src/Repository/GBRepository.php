@@ -48,8 +48,7 @@ class GBRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('g')
                         ->leftJoin('g.user', 'u', 'WITH', 'u.id = g.user_id')
-                        ->orderBy($column, strtoupper($orderBy))
-        ;
+                        ->orderBy($column, strtoupper($orderBy));
     }
 
     /**
@@ -57,12 +56,19 @@ class GBRepository extends ServiceEntityRepository
      * @param int $id
      * @return object
      */
-    public function findAllEntriesByUserId(int $id): object
+    public function findAllEntriesByUserId(int $id, string $orderBy, $name): object
     {
+        if (!in_array($name, $this->columns)) {
+            $name = 'id';
+        }
+        
+        $column = $name == 'name' ? sprintf('u.%s', $name) : sprintf('g.%s', $name);
+        
         return $this->createQueryBuilder('g')
                         ->where('g.user_id = :id')
                         ->setParameter('id', $id)
-                        ->orderBy('g.id', 'DESC');
+                        ->leftJoin('g.user', 'u', 'WITH', 'u.id = g.user_id')
+                        ->orderBy($column, strtoupper($orderBy));
     }
 
 //    /**

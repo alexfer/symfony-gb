@@ -29,7 +29,7 @@ class GBController extends AbstractController
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
 
     #[Route('/', name: 'app_gb_index', methods: ['GET'])]
-    ##[Route('/order/by/{name}/{order}', name: 'app_gb_sort_entries')]
+    #[Route('/order/by/{name}/{order}', name: 'app_gb_sort_entries')]
     public function index(Request $request, Paginator $paginator, GBRepository $gbRepository, UserInterface $user): Response
     {
         $name = $request->get('name');
@@ -37,7 +37,7 @@ class GBController extends AbstractController
 
         $orderBy = ($order == 'asc' ? 'asc' : 'desc');
 
-        $query = $gbRepository->findAllEntriesByUserId($user->getId());
+        $query = $gbRepository->findAllEntriesByUserId($user->getId(), $orderBy, $name);
 
         return $this->render('gb/index.html.twig', [
                     'orderBy' => ($request->get('order') == 'asc' ? 'desc' : 'asc'),

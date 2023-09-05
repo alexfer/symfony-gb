@@ -54,8 +54,8 @@
                                         <a class="link-secondary" href="{{ path('app_admin_user_show', {'id': entry.user.id}) }}">{{ entry.user.name }}</a>
                                     </td>
                                     <td>{{ entry.title }}</td>
-                                    <td>{{ entry.createdAt ? entry.createdAt|date('M d, Y H:i') : '' }}</td>
-                                    <td>{{ entry.updatedAt ? entry.updatedAt|date('M d, Y H:i') : '' }}</td>
+                                    <td>{{ entry.createdAt ? entry.createdAt|date(date_format) : '' }}</td>
+                                    <td>{{ entry.updatedAt ? entry.updatedAt|date(date_format) : '' }}</td>
                                     <td class="text-center">
                                         <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_edit', {'uuid': entry.uuid}) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         <a class="link-secondary text-decoration-none" href="{{ path('app_admin_entry_show', {'uuid': entry.uuid}) }}"><i class="fa fa-eye"></i></a>
