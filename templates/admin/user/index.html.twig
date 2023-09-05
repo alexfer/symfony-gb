@@ -48,7 +48,7 @@
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.roles|join(', ') }}</td>
                                     <td>{{ user.email }}</td>
-                                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i') : '' }}</td>
+                                    <td>{{ user.createdAt ? user.createdAt|date('M d, Y H:i') : '' }}</td>
                                     <td class="text-center">
                                         <a class="link-secondary text-decoration-none" href="{{ path('app_admin_user_edit', {'id': user.id}) }}"><i class="fa fa-pencil-square-o"></i></a>
                                         <a class="link-secondary text-decoration-none" href="{{ path('app_admin_user_show', {'id': user.id}) }}"><i class="fa fa-eye"></i></a>

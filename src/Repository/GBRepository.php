@@ -17,22 +17,52 @@ use Doctrine\Persistence\ManagerRegistry;
 class GBRepository extends ServiceEntityRepository
 {
 
+    /**
+     * 
+     * @var array
+     */
+    private array $columns = ['id', 'name', 'title', 'email', 'created_at', 'updated_at'];
+
+    /**
+     * 
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GB::class);
     }
 
-    public function findAllEntries()
+    /**
+     * 
+     * @param string $orderBy
+     * @param string $name
+     * @return object|null
+     */
+    public function findAllEntries(string $orderBy, $name): object
     {
-        return $this->createQueryBuilder('gb')->orderBy('gb.id', 'DESC');
+        if (!in_array($name, $this->columns)) {
+            $name = 'id';
+        }
+
+        $column = $name == 'name' ? sprintf('u.%s', $name) : sprintf('g.%s', $name);
+
+        return $this->createQueryBuilder('g')
+                        ->leftJoin('g.user', 'u', 'WITH', 'u.id = g.user_id')
+                        ->orderBy($column, strtoupper($orderBy))
+        ;
     }
 
-    public function findAllEntriesByUserId($id)
+    /**
+     * 
+     * @param int $id
+     * @return object
+     */
+    public function findAllEntriesByUserId(int $id): object
     {
-        return $this->createQueryBuilder('gb')
-                        ->where('gb.user_id = :id')
+        return $this->createQueryBuilder('g')
+                        ->where('g.user_id = :id')
                         ->setParameter('id', $id)
-                        ->orderBy('gb.id', 'DESC');
+                        ->orderBy('g.id', 'DESC');
     }
 
 //    /**

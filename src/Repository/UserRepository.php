@@ -43,7 +43,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      * @param string $name
      * @return object|null
      */
-    public function findAllUsers(string $orderBy, string $name): ?object
+    public function findAllUsers(string $orderBy, $name): ?object
     {
         if (!in_array($name, $this->columns)) {
             $name = 'id';
