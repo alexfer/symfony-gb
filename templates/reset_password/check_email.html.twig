@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.password_reset_email_sent'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card border-secondary mt-5">
+            <div class="card-header">
+                <h5>{{ 'title.password_reset_email_sent'|trans }}</h5>
+            </div>
+            <div class="card-body">
+                {{ 'message.password_reset_email_sent'|trans({
+                    '%url%': path('app_forgot_password_request'),
+                    '%expair_link%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
+                })|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.reset_your_password'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(resetForm) }}
+        <div class="card border-secondary mt-5">
+            <div class="card-header">
+                <h5>{{ 'title.reset_your_password'|trans }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    {{ form_row(resetForm.plainPassword) }}
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn {{ button_color|default('btn-primary') }}">{{ button_label|default('action.reset_password'|trans) }}</button>
+            </div>
+        </div>
+        {{ form_end(resetForm) }}
+    </div>
+{% endblock %}

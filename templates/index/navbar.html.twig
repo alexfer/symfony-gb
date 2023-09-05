@@ -11,9 +11,10 @@
                 </li>
             </ul>
             <ul class="navbar-nav nav ml-auto">
-                {% if app.user %}
-                    <li class="nav-item dropdown justify-content-between">
+                <li class="nav-item dropdown justify-content-between">
+                    {% if app.user %}
                         <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-o"></i>
                             {{ app.user.email }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="userMenu">
@@ -30,13 +31,17 @@
                         </div>
                     </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">{{ 'title.register'|trans }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
-                    </li>
+                    <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-o"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userMenu">
+                        <a class="dropdown-item" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('app_register') }}">{{ 'title.register'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path('app_forgot_password_request') }}">{{ 'action.reset_password'|trans }}</a>
+                    </div>
+
                 {% endif %}
+                </li>
             </ul>
         </div>
     </nav>

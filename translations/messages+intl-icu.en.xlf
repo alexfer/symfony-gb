@@ -117,6 +117,14 @@
                 <target>Change password</target>
             </trans-unit>
 
+            <trans-unit id="action.send_password_reset_email">
+                <source>action.send_password_reset_email</source>
+                <target>Send password reset email</target>
+            </trans-unit>
+            <trans-unit id="action.reset_password">
+                <source>action.reset_password</source>
+                <target>Reset password</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Show</target>
@@ -148,6 +156,14 @@
             <trans-unit id="action.save">
                 <source>action.save</source>
                 <target>Save changes</target>
+            </trans-unit>
+            <trans-unit id="title.password_reset_email_sent">
+                <source>title.password_reset_email_sent</source>
+                <target>Password reset email sent</target>
+            </trans-unit>
+            <trans-unit id="title.reset_your_password">
+                <source>title.reset_your_password</source>
+                <target>Reset your password</target>
             </trans-unit>
             <trans-unit id="title.approve_entry">
                 <source>title.approve_entry</source>
@@ -459,6 +475,19 @@
                 <target><![CDATA[Your entry "{title}" has received a new comment. You can read the comment by following <a href="{link}">this link</a>]]></target>
             </trans-unit>
 
+            <trans-unit id="help.app_reset_password_email">
+                <source>help.app_reset_password_email</source>
+                <target><![CDATA[Enter your email address, and we will send you a link to reset your password.]]></target>
+            </trans-unit>
+            <trans-unit id="message.password_reset_email_sent">
+                <source>message.password_reset_email_sent</source>
+                <target><![CDATA[
+                            <p>
+                                If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+                            This link will expire in {expair_link}.
+                            </p>
+                            <p>If you don't receive an email please check your spam folder or <a href="{url}">try again</a>.</p>]]></target>
+            </trans-unit>
             <trans-unit id="help.app_description">
                 <source>help.app_description</source>
                 <target><![CDATA[This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.]]></target>
