@@ -26,17 +26,23 @@ class ResetPasswordController extends AbstractController
 
     use ResetPasswordControllerTrait;
 
+    private ?string $emailSender;
+    private ?string $emailSenderName;
+
     /**
      * 
      * @param ResetPasswordHelperInterface $resetPasswordHelper
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(
+            string $emailSender,
+            string $emailSenderName,
             private ResetPasswordHelperInterface $resetPasswordHelper,
             private EntityManagerInterface $entityManager,
     )
     {
-        
+        $this->emailSender = $emailSender;
+        $this->emailSenderName = $emailSenderName;
     }
 
     /**
@@ -200,14 +206,13 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-                ->from(new Address('alexandershtyher@gmail.com', 'Alexander Sh'))
+                ->from(new Address($this->emailSender, $this->emailSenderName))
                 ->to($user->getEmail())
-                ->subject('Your password reset request')
+                ->subject($translator->trans('subject.password_reset_request'))
                 ->htmlTemplate('reset_password/email.html.twig')
                 ->context([
             'resetToken' => $resetToken,
-                ])
-        ;
+                ]);
 
         $mailer->send($email);
 

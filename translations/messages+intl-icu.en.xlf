@@ -491,6 +491,10 @@
                 <source>message.reset_password_not_tiken_found</source>
                 <target>No reset password token found in the URL or in the session.</target>
             </trans-unit>
+            <trans-unit id="subject.password_reset_request">
+                <source>subject.password_reset_request</source>
+                <target>Your password reset request</target>
+            </trans-unit>
             <trans-unit id="message.password_reset_email_sent">
                 <source>message.password_reset_email_sent</source>
                 <target><![CDATA[

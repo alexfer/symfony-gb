@@ -54,13 +54,13 @@ class ProfileType extends AbstractType
                         'attr' => [
                             'class' => 'form-control',
                         ],
-                        'label' => (new TranslatableMessage('label.new_password')),
+                        'label' => 'label.new_password',
                     ],
                     'second_options' => [
                         'attr' => [
                             'class' => 'form-control',
                         ],
-                        'label' => new TranslatableMessage('label.repeat_password'),
+                        'label' => 'label.repeat_password',
                         'label_attr' => [
                             'class' => 'mt-3',
                         ],

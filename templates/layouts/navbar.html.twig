@@ -1,0 +1,88 @@
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('app_index') }}">{{ 'menu.homepage'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-auto" href="#" id="locales" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-solid fa-globe"></i>
+                        {{ 'menu.choose_language'|trans }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="locales">
+                        {% for locale in locales() %}
+                            <a class="dropdown-item" href="#{{ locale.code }}">{{ locale.code }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item dropdown justify-content-between">
+                    {% if app.user %}
+                        <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-o"></i>
+                            {{ app.user.email }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userMenu">
+                            <a class="dropdown-item" href="{{ path('app_profile') }}">{{ 'menu.user'|trans }}</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('app_admin_index') }}">{{ 'action.entries'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_admin_users') }}">{{ 'menu.users'|trans }}</a>
+                            {% else %}
+                                <a class="dropdown-item" href="{{ path('app_gb_index') }}">{{ 'user.entries'|trans }}</a>
+                                <a class="dropdown-item" href="{{ path('app_gb_new') }}">{{ 'action.create_entry'|trans }}</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'menu.logout'|trans }}</a>
+                        </div>
+                    {% else %}
+                        <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-o"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userMenu">
+                            <a class="dropdown-item" href="{{ path('app_login') }}">{{ 'action.login'|trans }}</a>
+                            <a class="dropdown-item" href="{{ path('app_register') }}">{{ 'title.register'|trans }}</a>
+                            <a class="dropdown-item" href="{{ path('app_forgot_password_request') }}">{{ 'action.reset_password'|trans }}</a>
+                        </div>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <div id="locale-selector-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-lg modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" lang="en">
+                        {# display this title always in English to make the language selector easier to use #}
+                        Choose your language
+                    </p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <ul class="locales">
+                        {% for locale in locales() %}
+                            {% set is_active = app.request.locale == locale.code %}
+                            {% set is_rtl = locale.code in ['uk|ru'] %}
+                            <li class="{{ is_active ? 'active' }} {{ is_rtl ? 'rtl' }}" translate="no">
+                                <a class="stretched-link" lang="{{ locale.code }}" hreflang="{{ locale.code }}" href="{{ path(app.request.get('_route', 'app_index'), app.request.get('_route_params', [])|merge({_locale: locale.code})) }}">
+                                    {{ locale.name|capitalize }}
+                                    <small>{{ locale.code }}</small>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
