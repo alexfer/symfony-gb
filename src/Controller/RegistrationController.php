@@ -19,19 +19,35 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegistrationController extends AbstractController
 {
 
+    /**
+     * 
+     * @var EmailVerifier
+     */
     private EmailVerifier $emailVerifier;
 
+    /**
+     * 
+     * @param EmailVerifier $emailVerifier
+     */
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/register', name: 'app_register')]
     public function register(
             Request $request,
             UserPasswordHasherInterface $userPasswordHasher,
             EntityManagerInterface $entityManager,
-            TranslatorInterface $translator
+            TranslatorInterface $translator,
     ): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
@@ -77,6 +93,11 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request): Response
     {

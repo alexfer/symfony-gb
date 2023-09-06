@@ -1,17 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'menu.user'|trans }}{% endblock %}
+{% block title %}{{ 'title.update_profile'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="container">          
+    <div class="container">
+        {{ form_start(form) }}
+        {% include 'flashMessage/flashMessage.html.twig' %}
         <div class="card border-secondary mt-5">
             <div class="card-header">
-                <h5>{{ 'menu.user'|trans }}</h5>        
+                <h5>{{ 'title.update_profile'|trans }}</h5>
             </div>
-            <div class="card-body">    
-                This friendly messages is coming    
+            <div class="card-body">
+                <div class="form-group">
+                    {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label for="disabledEmail">{{ 'label.email'|trans }}</label>
+                        <input type="text" id="disabledEmail" class="form-control" value="{{ app.user.email }}">
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form_row(form.plainPassword) }}
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn {{ button_color|default('btn-primary') }}">{{ button_label|default('action.update'|trans) }}</button>
             </div>
         </div>
+        {{ form_end(form) }}
     </div>
-</div>
 {% endblock %}

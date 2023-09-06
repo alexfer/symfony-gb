@@ -26,8 +26,17 @@ use App\Repository\{
 class IndexController extends AbstractController
 {
 
+    /**
+     * 
+     * @param GBRepository $gbRepository
+     * @param CommentRepository $commentRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_index')]
-    public function index(GBRepository $gbRepository, CommentRepository $commentRepository): Response
+    public function index(
+            GBRepository $gbRepository,
+            CommentRepository $commentRepository,
+    ): Response
     {
         return $this->render('index/index.html.twig', [
                     'entries' => $gbRepository->findBy(['approved' => true], ['id' => 'DESC'], 5),
@@ -35,12 +44,20 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param CommentRepository $commentRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/show/{uuid}', name: 'app_entry_show', methods: ['GET', 'POST'])]
     public function show(
             Request $request,
             GB $gb,
             CommentRepository $commentRepository,
-            EntityManagerInterface $entityManager
+            EntityManagerInterface $entityManager,
     ): Response
     {
         $comment = new Comment();
@@ -74,12 +91,20 @@ class IndexController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Comment $comment
+     * @param UserInterface $user
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/publish-comment/{id}', name: 'app_comment_publish', methods: ['GET'])]
     public function publish(
             Comment $comment,
             UserInterface $user,
             EntityManagerInterface $entityManager,
-            TranslatorInterface $translator
+            TranslatorInterface $translator,
     ): Response
     {
         if ($comment->getGb()->getUserId() != $user->getId()) {
@@ -96,6 +121,12 @@ class IndexController extends AbstractController
                         ], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param Attach $attach
+     * @return Response
+     */
     #[Route('/{uuid}/download-file/{id}', name: 'app_download_file', methods: ['GET'])]
     public function download(Request $request, Attach $attach): Response
     {
@@ -107,12 +138,20 @@ class IndexController extends AbstractController
         return $this->redirectToRoute('app_entry_show', ['uuid' => $attach->getGb()->getUuid()], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * 
+     * @param Comment $comment
+     * @param UserInterface $user
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/delete-comment/{id}', name: 'app_comment_delete', methods: ['GET'])]
     public function delete(
             Comment $comment,
             UserInterface $user,
             EntityManagerInterface $entityManager,
-            TranslatorInterface $translator
+            TranslatorInterface $translator,
     ): Response
     {
         if ($comment->getGb()->getUserId() != $user->getId()) {

@@ -18,9 +18,20 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
 
+    /**
+     * 
+     * @param Request $request
+     * @param Paginator $paginator
+     * @param UserRepository $userRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_admin_users')]
     #[Route('/order/by/{name}/{order}', name: 'app_admin_sort_users')]
-    public function index(Request $request, Paginator $paginator, UserRepository $userRepository): Response
+    public function index(
+            Request $request,
+            Paginator $paginator,
+            UserRepository $userRepository,
+    ): Response
     {
         $name = $request->get('name');
         $order = $request->get('order');
@@ -35,8 +46,19 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param UserPasswordHasherInterface $userPasswordHasher
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/new', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function new(
+            Request $request,
+            UserPasswordHasherInterface $userPasswordHasher,
+            EntityManagerInterface $entityManager,
+    ): Response
     {
         $user = new User();
 
@@ -70,8 +92,19 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(
+            Request $request,
+            User $user,
+            EntityManagerInterface $entityManager,
+    ): Response
     {
         $form = $this->createForm(FormType::class, $user);
         $form->handleRequest($request);
@@ -92,6 +125,11 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param User $user
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -100,8 +138,21 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/{id}/trash', name: 'app_admin_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function delete(
+            Request $request,
+            User $user,
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator,
+    ): Response
     {
         
     }

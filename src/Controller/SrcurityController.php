@@ -12,8 +12,17 @@ use App\Form\User\LoginType;
 class SrcurityController extends AbstractController
 {
 
+    /**
+     * 
+     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     #[Route('/login', name: 'app_login')]
-    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    public function login(
+            Request $request,
+            AuthenticationUtils $authenticationUtils,
+    ): Response
     {
         $securityContext = $this->container->get('security.authorization_checker');
 
@@ -33,12 +42,21 @@ class SrcurityController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @throws \Exception
+     */
     #[Route('/login/failed', name: 'app_login_failed')]
     public function error()
     {
         throw new \Exception('Please confirm your email');
     }
 
+    /**
+     * 
+     * @return Response
+     * @throws \Exception
+     */
     #[Route('/logout', name: 'app_logout')]
     public function logout(): Response
     {

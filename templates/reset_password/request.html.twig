@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    {{ form_label(requestForm.email, 'Email') }}
+                    {{ form_label(requestForm.email, 'label.email'|trans) }}
                     {{ form_widget(requestForm.email, {'attr': {'class': 'form-control'}}) }}
                     <small class="form-text text-muted">
                         {{ 'help.app_reset_password_email'|trans }}

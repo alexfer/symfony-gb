@@ -326,6 +326,10 @@
                 <source>label.new_password</source>
                 <target>New password</target>
             </trans-unit>
+            <trans-unit id="label.repeat_password">
+                <source>label.repeat_password</source>
+                <target>Repeat password</target>
+            </trans-unit>
             <trans-unit id="label.new_password_confirm">
                 <source>label.new_password_confirm</source>
                 <target>Confirm password</target>
@@ -361,6 +365,10 @@
             <trans-unit id="title.entry_new">
                 <source>title.entry_new</source>
                 <target>Entry creation</target>
+            </trans-unit>
+            <trans-unit id="title.update_profile">
+                <source>title.update_profile</source>
+                <target>Update your profile</target>
             </trans-unit>
             <trans-unit id="title.attach_file">
                 <source>title.attach_file</source>
@@ -478,6 +486,10 @@
             <trans-unit id="help.app_reset_password_email">
                 <source>help.app_reset_password_email</source>
                 <target><![CDATA[Enter your email address, and we will send you a link to reset your password.]]></target>
+            </trans-unit>
+            <trans-unit id="message.reset_password_not_tiken_found">
+                <source>message.reset_password_not_tiken_found</source>
+                <target>No reset password token found in the URL or in the session.</target>
             </trans-unit>
             <trans-unit id="message.password_reset_email_sent">
                 <source>message.password_reset_email_sent</source>
