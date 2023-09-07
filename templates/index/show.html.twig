@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ gb.Title }}{% endblock %}
-
+{# Time diff bundle: https://github.com/KnpLabs/KnpTimeBundle #}
 {% block body %}
     <div class="container">
         <div class="card border-secondary mt-4">
@@ -92,7 +92,10 @@
                                                 <a href="{{ path('app_comment_publish', {id: comment.id}) }}" role="button" class="btn btn-outline-secondary btn-sm">{{ 'action.publish_comment'|trans }}</a> <a href="{{ path('app_comment_delete', {id: comment.id}) }}" role="button" class="btn btn-outline-danger btn-sm">{{ 'action.delete_comment'|trans }}</a>
                                             {% endif %}
                                         {% endif %}
-                                        <small class="text-muted float-right"><i class="fa fa-calendar"></i> {{ comment.createdAt ? comment.createdAt|date(date_format) : '' }}</small>
+                                        <small class="text-muted float-right">
+                                            <i class="fa fa-calendar"></i>
+                                            {{ comment.createdAt|time_diff }}
+                                        </small>
                                     </div>
                                 </div>
                             </div>
