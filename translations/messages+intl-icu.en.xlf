@@ -68,6 +68,10 @@
                 <source>title.last_comments</source>
                 <target>Last Comments</target>
             </trans-unit>
+            <trans-unit id="entry.comments">
+                <source>entry.comments</source>
+                <target>comments</target>
+            </trans-unit>
             <trans-unit id="title.source_code">
                 <source>title.source_code</source>
                 <target>Source code used to render this page</target>
