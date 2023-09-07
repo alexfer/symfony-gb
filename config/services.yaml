@@ -7,9 +7,8 @@ parameters:
     app.date_format: 'M d, Y H:i'
     locale: 'en'
     # This parameter defines the codes of the locales (languages) enabled in the application
-    app_locales: en|uk|ru
+    app_locales: en|uk
     app.notifications.email_sender: alexandershtyher@gmail.com
-
     app.notifications.email_sender_name: App Notification
 
 services:

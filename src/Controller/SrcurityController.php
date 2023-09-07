@@ -27,7 +27,7 @@ class SrcurityController extends AbstractController
         $securityContext = $this->container->get('security.authorization_checker');
 
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('homepage');
         }
 
         $defaultData = ['username' => $authenticationUtils->getLastUsername()];

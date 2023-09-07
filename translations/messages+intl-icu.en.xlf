@@ -58,7 +58,15 @@
 
             <trans-unit id="title.homepage">
                 <source>title.homepage</source>
-                <target><![CDATA[Welcome to the <strong>Guest Book</strong> application]]></target>
+                <target>Welcome to the Guest Book application</target>
+            </trans-unit>
+            <trans-unit id="title.last_entries">
+                <source>title.last_entries</source>
+                <target>Last Entries</target>
+            </trans-unit>
+            <trans-unit id="title.last_comments">
+                <source>title.last_comments</source>
+                <target>Last Comments</target>
             </trans-unit>
             <trans-unit id="title.source_code">
                 <source>title.source_code</source>

@@ -69,7 +69,7 @@ class UserAuthenticator extends AbstractAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         return new RedirectResponse(
-                $this->router->generate('app_index')
+                $this->router->generate('homepage')
         );
     }
 

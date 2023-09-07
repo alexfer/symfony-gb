@@ -32,7 +32,7 @@ class IndexController extends AbstractController
      * @param CommentRepository $commentRepository
      * @return Response
      */
-    #[Route('/', name: 'app_index')]
+    #[Route('/index', name: 'app_index')]
     public function index(
             GBRepository $gbRepository,
             CommentRepository $commentRepository,

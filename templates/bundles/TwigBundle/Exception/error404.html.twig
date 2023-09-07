@@ -4,17 +4,17 @@
 {% block title %}{{ 'http_error.name'|trans({ 'status_code': 404 }) }}{% endblock %}
 
 {% block body %}
-    <div class="container">        
+    <div class="container">
         <div class="card border-secondary mt-5">
             <div class="card-header">
-                <h5 class="text-danger">{{ 'http_error.name'|trans({ 'status_code': 404 }) }}</h5>                        
+                <h5 class="text-danger">{{ 'http_error.name'|trans({ 'status_code': 404 }) }}</h5>
             </div>
             <div class="card-body">
                 <p class="lead">
                     {{ 'http_error_404.description'|trans }}
                 </p>
                 <p>
-                    {{ 'http_error_404.suggestion'|trans({ 'url': path('app_index') })|raw }}
+                    {{ 'http_error_404.suggestion'|trans({ 'url': path('homepage') })|raw }}
                 </p>
             </div>
         </div>

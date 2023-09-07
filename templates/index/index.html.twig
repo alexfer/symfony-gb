@@ -1,14 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Guest Book Summary!{% endblock %}
-
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-sm-6 my-5">
                 <div class="card border-secondary">
                     <div class="card-header">
-                        Last Entries
+                        {{ 'title.last_entries'|trans }}
                     </div>
                     <div class="card-body p-2">
                         {% for entry in entries  %}
@@ -44,7 +40,7 @@
             <div class="col-sm-6 my-5">
                 <div class="card border-secondary">
                     <div class="card-header">
-                        Last Comments
+                        {{ 'title.last_comments'|trans }}
                     </div>
                     <div class="comment-widgets">
                         {% for comment in comments %}
