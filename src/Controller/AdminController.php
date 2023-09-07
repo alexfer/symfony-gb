@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Security\Core\Security;
 use App\Utils\Paginator;
 use App\Service\FileUploader;
 use App\Entity\GB;
@@ -23,7 +22,7 @@ class AdminController extends AbstractController
 {
 
     private const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
-    private const ACCESS_DENIED = 'Unable to access this page!';
+    private const ACCESS_DENIED = 'You don\'t have permission to access to this resource.';
 
     /**
      * 

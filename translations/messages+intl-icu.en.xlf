@@ -108,6 +108,10 @@
                 <source>title.add_comment</source>
                 <target>Add a comment</target>
             </trans-unit>
+            <trans-unit id="entry.leave_comment">
+                <source>entry.leave_comment</source>
+                <target>Leave a comment</target>
+            </trans-unit>
             <trans-unit id="title.comment_error">
                 <source>title.comment_error</source>
                 <target>There was an error publishing your comment</target>

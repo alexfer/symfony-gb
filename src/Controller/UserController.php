@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
 
-    private const ACCESS_DENIED = 'Unable to access this page!';
+    private const ACCESS_DENIED = 'You don\'t have permission to access to this resource.';
 
     /**
      * 
