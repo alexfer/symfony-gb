@@ -28,7 +28,7 @@
                 <button class="btn {{ button_color|default('btn-primary') }}">{{ button_label|default('action.update'|trans) }}</button>
             </div>
         </div>
-            {{ form_errors(form) }}
+        {{ form_errors(form) }}
         {{ form_end(form) }}
     </div>
 {% endblock %}

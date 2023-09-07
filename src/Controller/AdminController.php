@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Security\Core\Security;
 use App\Utils\Paginator;
 use App\Service\FileUploader;
 use App\Entity\GB;
@@ -21,7 +22,8 @@ use App\Form\{
 class AdminController extends AbstractController
 {
 
-    const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
+    private const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
+    private const ACCESS_DENIED = 'Unable to access this page!';
 
     /**
      * 
@@ -37,6 +39,8 @@ class AdminController extends AbstractController
     #[Route('/order/by/{name}/{order}', name: 'app_admin_sort_entries')]
     public function index(Request $request, Paginator $paginator, GBRepository $gbRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $name = $request->get('name');
         $order = $request->get('order');
 
@@ -53,6 +57,8 @@ class AdminController extends AbstractController
     #[Route('/{uuid}', name: 'app_admin_entry_show', methods: ['GET'])]
     public function show(GB $gb): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         return $this->render('admin/gb/show.html.twig', [
                     'gb' => $gb,
         ]);
@@ -61,6 +67,8 @@ class AdminController extends AbstractController
     #[Route('/{uuid}/edit', name: 'app_admin_entry_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, GB $gb, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $form = $this->createForm(AttachType::class, $gb);
         $form->handleRequest($request);
 
@@ -99,6 +107,8 @@ class AdminController extends AbstractController
     #[Route('/{uuid}/trash', name: 'app_admin_entry_delete', methods: ['POST'])]
     public function delete(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $token = $request->request->get('token');
 
         if (!$this->isCsrfTokenValid('delete', $token)) {
@@ -116,6 +126,8 @@ class AdminController extends AbstractController
     #[Route('/{uuid}/approve', name: 'app_admin_entry_approve', methods: ['GET'])]
     public function approve(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $gb->setApproved(1);
         $entityManager->flush();
 
@@ -128,6 +140,8 @@ class AdminController extends AbstractController
     #[Route('/{uuid}/reject', name: 'app_admin_entry_reject', methods: ['GET'])]
     public function reject(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $gb->setApproved(0);
         $entityManager->flush();
 

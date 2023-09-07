@@ -61,9 +61,9 @@ class GBRepository extends ServiceEntityRepository
         if (!in_array($name, $this->columns)) {
             $name = 'id';
         }
-        
+
         $column = $name == 'name' ? sprintf('u.%s', $name) : sprintf('g.%s', $name);
-        
+
         return $this->createQueryBuilder('g')
                         ->where('g.user_id = :id')
                         ->setParameter('id', $id)

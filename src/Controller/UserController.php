@@ -18,6 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserController extends AbstractController
 {
 
+    private const ACCESS_DENIED = 'Unable to access this page!';
+
     /**
      * 
      * @param Request $request
@@ -33,6 +35,8 @@ class UserController extends AbstractController
             UserRepository $userRepository,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $name = $request->get('name');
         $order = $request->get('order');
 
@@ -60,10 +64,11 @@ class UserController extends AbstractController
             EntityManagerInterface $entityManager,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $user = new User();
 
         $form = $this->createForm(FormType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -106,6 +111,8 @@ class UserController extends AbstractController
             EntityManagerInterface $entityManager,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         $form = $this->createForm(FormType::class, $user);
         $form->handleRequest($request);
 
@@ -133,6 +140,8 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
+
         return $this->render('admin/user/show.html.twig', [
                     'user' => $user,
         ]);
@@ -154,6 +163,6 @@ class UserController extends AbstractController
             TranslatorInterface $translator,
     ): Response
     {
-        
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
     }
 }

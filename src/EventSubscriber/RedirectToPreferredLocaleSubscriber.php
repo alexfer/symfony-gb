@@ -53,7 +53,7 @@ final class RedirectToPreferredLocaleSubscriber implements EventSubscriberInterf
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-        
+
         // Ignore sub-requests and all URLs but the homepage
         if (!$event->isMainRequest() || '/' !== $request->getPathInfo()) {
             return;
@@ -61,8 +61,8 @@ final class RedirectToPreferredLocaleSubscriber implements EventSubscriberInterf
         // Ignore requests from referrers with the same HTTP host in order to prevent
         // changing language for users who possibly already selected it for this application.
         $referrer = $request->headers->get('referer');
-        
-        if (null !== $referrer && u($referrer)->ignoreCase()->startsWith($request->getSchemeAndHttpHost())) {            
+
+        if (null !== $referrer && u($referrer)->ignoreCase()->startsWith($request->getSchemeAndHttpHost())) {
             return;
         }
 
