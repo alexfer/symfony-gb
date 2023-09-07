@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\{
     GB,
-    Attach,
 };
 use App\Form\{
-    GBType,
     AttachType,
 };
 use App\Repository\GBRepository;
@@ -28,9 +26,22 @@ class GBController extends AbstractController
 
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
 
+    /**
+     * 
+     * @param Request $request
+     * @param Paginator $paginator
+     * @param GBRepository $gbRepository
+     * @param UserInterface $user
+     * @return Response
+     */
     #[Route('/', name: 'app_gb_index', methods: ['GET'])]
     #[Route('/order/by/{name}/{order}', name: 'app_gb_sort_entries')]
-    public function index(Request $request, Paginator $paginator, GBRepository $gbRepository, UserInterface $user): Response
+    public function index(
+            Request $request,
+            Paginator $paginator,
+            GBRepository $gbRepository,
+            UserInterface $user,
+    ): Response
     {
         $name = $request->get('name');
         $order = $request->get('order');
@@ -55,8 +66,22 @@ class GBController extends AbstractController
         return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param UserInterface $user
+     * @param EntityManagerInterface $entityManager
+     * @param SluggerInterface $slugger
+     * @return Response
+     * @throws \Exception
+     */
     #[Route('/new', name: 'app_gb_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserInterface $user, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function new(
+            Request $request,
+            UserInterface $user,
+            EntityManagerInterface $entityManager,
+            SluggerInterface $slugger,
+    ): Response
     {
         $gb = new GB();
 
@@ -101,7 +126,10 @@ class GBController extends AbstractController
     }
 
     #[Route('/{uuid}', name: 'app_gb_show', methods: ['GET'])]
-    public function show(GB $gb): Response
+    public function show(
+            GB $gb,
+            UserInterface $user,
+    ): Response
     {
         return $this->render('gb/show.html.twig', [
                     'gb' => $gb,
@@ -112,6 +140,7 @@ class GBController extends AbstractController
     public function edit(
             Request $request,
             GB $gb,
+            UserInterface $user,
             EntityManagerInterface $entityManager,
             SluggerInterface $slugger,
     ): Response
@@ -152,8 +181,21 @@ class GBController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param UserInterface $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/{id}', name: 'app_gb_delete', methods: ['POST'])]
-    public function delete(Request $request, GB $gb, EntityManagerInterface $entityManager): Response
+    public function delete(
+            Request $request,
+            GB $gb,
+            UserInterface $user,
+            EntityManagerInterface $entityManager,
+    ): Response
     {
         if ($this->isCsrfTokenValid('delete' . $gb->getId(), $request->request->get('_token'))) {
             $entityManager->remove($gb);
