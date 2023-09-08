@@ -16,12 +16,9 @@ class GBType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('title', TextType::class)
-                ->add('message', CKEditorType::class)
+        $builder->add('title', TextType::class, ['label' => 'label.title'])
+                ->add('message', CKEditorType::class, ['label' => 'label.content'])
                 ->add('name', AttachType::class)
-//                ->add('file', FileType::class, [
-//                    'label' => 'Attach file',
-//        ])
         ;
     }
 

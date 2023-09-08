@@ -64,7 +64,13 @@ class IndexController extends AbstractController
         $comment->setGb($gb);
 
         $token = $this->container->get('security.token_storage')->getToken();
-        $condition = $token !== null ? [] : ['approved' => true];
+        $condition = $token !== null ? ['gb_id' => $gb->getId()] : ['gb_id' => $gb->getId(), 'approved' => true];
+        
+        $totalComments = $commentRepository->countComments($comment->getGb()->getId());
+        
+        if($token !== null) {
+            $totalComments = $commentRepository->countAllComments($comment->getGb()->getId());
+        }
 
         $comments = $commentRepository->findBy($condition, ['created_at' => 'DESC'], 10);
 
@@ -86,7 +92,7 @@ class IndexController extends AbstractController
         return $this->render('index/show.html.twig', [
                     'comment_form' => $form->createView(),
                     'gb' => $gb,
-                    'totalComments' => $commentRepository->countComments($comment->getGb()->getId(), $token ? 0 : 1),
+                    'totalComments' => $totalComments,
                     'comments' => $comments,
         ]);
     }

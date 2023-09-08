@@ -7,7 +7,7 @@ fos_ck_editor:
                 [ "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"  ], ["-"],
                 [ "Undo", "Redo" ], ["-"],
                 [ "CopyFormatting", "RemoveFormat" ], ["-"],
-                [ "Image", "Table", "HorizontalRule", "Smiley", "SpecialChar", "PageBreak" ], ["-"],
+                [ "Link", "Image", "Table", "HorizontalRule", "Smiley", "SpecialChar", "PageBreak" ], ["-"],
                 [ "Source", "-", "Save", "Anchor", "Maximize" ], ["-"],
                 ["About"],
               ]

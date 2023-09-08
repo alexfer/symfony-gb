@@ -25,13 +25,25 @@ class CommentRepository extends ServiceEntityRepository
     /**
      * @return Comment[] Returns an array of Comment objects
      */
-    public function countComments($id, int $approved = 1)
+    public function countComments($id)
     {
         return $this->createQueryBuilder('c')
                         ->select('count(c.id)')
-                        ->andWhere('c.approved = :approved')
-                        ->setParameter('approved', $approved)
+                        ->where('c.approved = 1')
                         ->andWhere('c.gb_id = :gb_id')
+                        ->setParameter('gb_id', $id)
+                        ->getQuery()
+                        ->getSingleScalarResult();
+    }
+
+    /**
+     * @return Comment[] Returns an array of Comment objects
+     */
+    public function countAllComments($id)
+    {
+        return $this->createQueryBuilder('c')
+                        ->select('count(c.id)')
+                        ->where('c.gb_id = :gb_id')
                         ->setParameter('gb_id', $id)
                         ->getQuery()
                         ->getSingleScalarResult();

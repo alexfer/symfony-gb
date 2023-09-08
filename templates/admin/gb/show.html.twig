@@ -27,7 +27,7 @@
                 <b class="text-muted">Date Updated: </b>{{ gb.updatedAt ? gb.updatedAt|date(date_format) : '' }}
                 <hr>
                 <b class="text-muted">UUid:</b>
-                <a class="link-secondary" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a>
+                <a class="link-secondary" target="_blank" href="{{ path('app_entry_show', {uuid: gb.uuid}) }}">Reference to page</a>
                 <hr>
                 {% include 'gb/_attachments.html.twig' %}
                 <hr>

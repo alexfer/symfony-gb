@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Utils\Paginator;
 use App\Service\FileUploader;
 
@@ -25,6 +26,17 @@ class GBController extends AbstractController
 {
 
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
+    private const ACCESS_DENIED = 'You don\'t have permission to access to this resource.';
+    
+    /**
+     * 
+     * @param int|null $objectId
+     * @return string
+     */
+    private function getTargetDir(?int $objectId): string
+    {
+        return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
+    }
 
     /**
      * 
@@ -58,20 +70,11 @@ class GBController extends AbstractController
 
     /**
      * 
-     * @param int|null $objectId
-     * @return string
-     */
-    private function getTargetDir(?int $objectId): string
-    {
-        return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
-    }
-
-    /**
-     * 
      * @param Request $request
      * @param UserInterface $user
      * @param EntityManagerInterface $entityManager
      * @param SluggerInterface $slugger
+     * @param TranslatorInterface $translator
      * @return Response
      * @throws \Exception
      */
@@ -81,15 +84,18 @@ class GBController extends AbstractController
             UserInterface $user,
             EntityManagerInterface $entityManager,
             SluggerInterface $slugger,
+            TranslatorInterface $translator,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
+        
         $gb = new GB();
 
         $form = $this->createForm(AttachType::class, $gb);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Entry has been created successfuly.');
+            $this->addFlash('success', $translator->trans('entry.created_successfully'));
 
             $uuid = Uuid::v4();
             $gb->setUuid($uuid)->setUser($user)->setApproved(0);
@@ -125,26 +131,42 @@ class GBController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param GB $gb
+     * @return Response
+     */
+    
     #[Route('/{uuid}', name: 'app_gb_show', methods: ['GET'])]
-    public function show(
-            GB $gb,
-            UserInterface $user,
-    ): Response
+    public function show(GB $gb): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
         return $this->render('gb/show.html.twig', [
                     'gb' => $gb,
         ]);
     }
-
+    
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param EntityManagerInterface $entityManager
+     * @param SluggerInterface $slugger
+     * @param TranslatorInterface $translator
+     * @return Response
+     * @throws \Exception
+     */
     #[Route('/{uuid}/edit', name: 'app_gb_edit', methods: ['GET', 'POST'])]
     public function edit(
             Request $request,
             GB $gb,
-            UserInterface $user,
             EntityManagerInterface $entityManager,
             SluggerInterface $slugger,
+            TranslatorInterface $translator,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
+        
         $form = $this->createForm(AttachType::class, $gb);
         $form->handleRequest($request);
 
@@ -167,7 +189,7 @@ class GBController extends AbstractController
                 $entityManager->flush();
             }
 
-            $this->addFlash('success', 'Entry has been updated successfuly.');
+            $this->addFlash('success', $translator->trans('entry.updated_successfully'));
             $entityManager->flush();
 
             return $this->redirectToRoute('app_gb_edit', [
@@ -185,7 +207,6 @@ class GBController extends AbstractController
      * 
      * @param Request $request
      * @param GB $gb
-     * @param UserInterface $user
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
@@ -193,10 +214,11 @@ class GBController extends AbstractController
     public function delete(
             Request $request,
             GB $gb,
-            UserInterface $user,
             EntityManagerInterface $entityManager,
     ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
+        
         if ($this->isCsrfTokenValid('delete' . $gb->getId(), $request->request->get('_token'))) {
             $entityManager->remove($gb);
             $entityManager->flush();
