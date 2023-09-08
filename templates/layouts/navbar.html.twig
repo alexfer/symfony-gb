@@ -15,7 +15,6 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-auto" href="#" id="locales" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-solid fa-globe"></i>
-                        {{ 'menu.choose_language'|trans }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="locales">
                         {% for locale in locales() %}
@@ -30,7 +29,7 @@
                     {% if app.user %}
                         <a class="nav-link dropdown-toggle mr-auto" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user-o"></i>
-                            {{ app.user.email }}
+                            {{ app.user.name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="userMenu">
                             <a class="dropdown-item" href="{{ path('app_profile') }}">{{ 'menu.user'|trans }}</a>
