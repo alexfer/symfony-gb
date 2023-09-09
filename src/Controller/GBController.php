@@ -27,7 +27,7 @@ class GBController extends AbstractController
 
     const PUBLIC_ATTACMENTS_DIR = '/public/attachments/entry/';
     private const ACCESS_DENIED = 'You don\'t have permission to access to this resource.';
-    
+
     /**
      * 
      * @param int|null $objectId
@@ -88,7 +88,7 @@ class GBController extends AbstractController
     ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
-        
+
         $gb = new GB();
 
         $form = $this->createForm(AttachType::class, $gb);
@@ -136,7 +136,6 @@ class GBController extends AbstractController
      * @param GB $gb
      * @return Response
      */
-    
     #[Route('/{uuid}', name: 'app_gb_show', methods: ['GET'])]
     public function show(GB $gb): Response
     {
@@ -145,7 +144,7 @@ class GBController extends AbstractController
                     'gb' => $gb,
         ]);
     }
-    
+
     /**
      * 
      * @param Request $request
@@ -166,7 +165,7 @@ class GBController extends AbstractController
     ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
-        
+
         $form = $this->createForm(AttachType::class, $gb);
         $form->handleRequest($request);
 
@@ -218,7 +217,7 @@ class GBController extends AbstractController
     ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null, self::ACCESS_DENIED);
-        
+
         if ($this->isCsrfTokenValid('delete' . $gb->getId(), $request->request->get('_token'))) {
             $entityManager->remove($gb);
             $entityManager->flush();

@@ -34,9 +34,20 @@ class AdminController extends AbstractController
         return $this->getParameter('kernel.project_dir') . self::PUBLIC_ATTACMENTS_DIR . $objectId;
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param Paginator $paginator
+     * @param GBRepository $gbRepository
+     * @return Response
+     */
     #[Route('/', name: 'app_admin_index')]
     #[Route('/order/by/{name}/{order}', name: 'app_admin_sort_entries')]
-    public function index(Request $request, Paginator $paginator, GBRepository $gbRepository): Response
+    public function index(
+            Request $request,
+            Paginator $paginator,
+            GBRepository $gbRepository,
+    ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
 
@@ -53,6 +64,11 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param GB $gb
+     * @return Response
+     */
     #[Route('/{uuid}', name: 'app_admin_entry_show', methods: ['GET'])]
     public function show(GB $gb): Response
     {
@@ -63,8 +79,22 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param EntityManagerInterface $entityManager
+     * @param SluggerInterface $slugger
+     * @return Response
+     * @throws \Exception
+     */
     #[Route('/{uuid}/edit', name: 'app_admin_entry_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, GB $gb, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function edit(
+            Request $request,
+            GB $gb,
+            EntityManagerInterface $entityManager,
+            SluggerInterface $slugger,
+    ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
 
@@ -103,8 +133,21 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/{uuid}/trash', name: 'app_admin_entry_delete', methods: ['POST'])]
-    public function delete(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function delete(
+            Request $request,
+            GB $gb,
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator,
+    ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
 
@@ -122,8 +165,20 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin');
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/{uuid}/approve', name: 'app_admin_entry_approve', methods: ['GET'])]
-    public function approve(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function approve(
+            Request $request,
+            GB $gb, EntityManagerInterface $entityManager,
+            TranslatorInterface $translator,
+    ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
 
@@ -136,8 +191,21 @@ class AdminController extends AbstractController
                         ], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * 
+     * @param Request $request
+     * @param GB $gb
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     #[Route('/{uuid}/reject', name: 'app_admin_entry_reject', methods: ['GET'])]
-    public function reject(Request $request, GB $gb, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function reject(
+            Request $request,
+            GB $gb,
+            EntityManagerInterface $entityManager,
+            TranslatorInterface $translator,
+    ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, self::ACCESS_DENIED);
 

@@ -65,10 +65,10 @@ class IndexController extends AbstractController
 
         $token = $this->container->get('security.token_storage')->getToken();
         $condition = $token !== null ? ['gb_id' => $gb->getId()] : ['gb_id' => $gb->getId(), 'approved' => true];
-        
+
         $totalComments = $commentRepository->countComments($comment->getGb()->getId());
-        
-        if($token !== null) {
+
+        if ($token !== null) {
             $totalComments = $commentRepository->countAllComments($comment->getGb()->getId());
         }
 
