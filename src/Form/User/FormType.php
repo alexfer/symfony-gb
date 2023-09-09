@@ -42,7 +42,7 @@ class FormType extends AbstractType
                     ],
                 ])
                 ->add('roles', ChoiceType::class, [
-                    'label' => 'Role',
+                    'label' => 'label.role',
                     'required' => true,
                     'multiple' => false,
                     'expanded' => false,

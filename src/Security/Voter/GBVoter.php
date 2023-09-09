@@ -8,7 +8,6 @@ use App\Entity\{
 };
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Bundle\SecurityBundle\Security;
 
 class GBVoter extends Voter
 {
@@ -16,13 +15,6 @@ class GBVoter extends Voter
     const DELETE = 'delete';
     const VIEW = 'view';
     const EDIT = 'edit';
-
-//    public function __construct(
-//            private Security $security,
-//    )
-//    {
-//        
-//    }
 
     /**
      * 
@@ -54,7 +46,7 @@ class GBVoter extends Voter
     {
         $user = $token->getUser();
 
-        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
         }
 

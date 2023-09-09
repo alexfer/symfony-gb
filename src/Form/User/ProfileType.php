@@ -30,6 +30,7 @@ class ProfileType extends AbstractType
     {
         $builder->add('name', TextType::class, ['attr' => [
                         'class' => 'form-control',
+                        'name' => 'sdfsdf',
                     ],
                 ])
                 ->add('plainPassword', RepeatedType::class, [

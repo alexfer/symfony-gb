@@ -10,7 +10,7 @@
                         {% for entry in entries  %}
                             <div class="well">
                                 <a class="pull-left mr-3 p-2" href="#">
-                                    <img class="media-object rounded-circle" src="{{ asset('images/avatar.png') }}" alt="user" width="64" class="rounded-circle">
+                                    <img class="media-object rounded-circle" src="{{ asset('images/avatar.png') }}" alt="{{ entry.user.name }}" width="64" class="rounded-circle">
                                 </a>
                                 <div class="media-body bg-light p-1 mb-2">
                                     <a href="{{ path('app_entry_show', {uuid: entry.uuid}) }}" title="{{ entry.title }}">

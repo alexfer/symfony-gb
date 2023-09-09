@@ -13,10 +13,13 @@
         {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {#{{ encore_entry_script_tags('frontend') }}#}
         {% endblock %}
         <footer class="footer">
             <div class="container">
-                <span class="text-muted">Gb Application.</span>
+                {% set year =  'now' | date('Y') %}
+                {% set build_year =  '2023' %}
+                <span class="text-muted">Gb Application. @ {{ year == build_year ? build_year : build_year ~ '-' ~ year }} <a class="text-decoration-none text-dark font-weight-bold" href="https://symfony.com/">Symfony</a></span>
             </div>
         </footer>
     </body>
