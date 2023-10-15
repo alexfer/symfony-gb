@@ -113,7 +113,7 @@ class GBController extends AbstractController
                 } catch (\Exception $ex) {
                     throw new \Exception($ex->getMessage());
                 }
-
+                
                 $attach->setGb($gb);
 
                 $entityManager->persist($attach);
